@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'fastpoke-backend' title`, () => {
+  it(`should have the 'fastpoke-frontend' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('fastpoke-backend');
+    expect(app.title).toEqual('fastpoke-frontend');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, fastpoke-backend');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, fastpoke-frontend');
   });
 });
