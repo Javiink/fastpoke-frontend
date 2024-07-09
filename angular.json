@@ -10,7 +10,12 @@
       "sourceRoot": "src",
       "prefix": "app",
       "i18n": {
-        "sourceLocale": "en-US"
+        "sourceLocale": "en",
+        "locales": {
+          "es": {
+            "translation": "src/locale/messages.es.json"
+          }
+        }
       },
       "architect": {
         "build": {
@@ -31,9 +36,13 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/ngx-spinner/animations/ball-scale-multiple.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "localize": true,
+            "i18nMissingTranslation": "error",
+            "i18nDuplicateTranslation": "warning"
           },
           "configurations": {
             "production": {
@@ -61,11 +70,17 @@
                   "with": "src/environments/environment.development.ts"
                 }
               ]
+            },
+            "i18n-es": {
+              "localize": ["es"]
             }
           },
           "defaultConfiguration": "production"
         },
         "serve": {
+          "options": {
+            "host": "0.0.0.0"
+          },
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
@@ -73,6 +88,9 @@
             },
             "development": {
               "buildTarget": "fastpoke-frontend:build:development"
+            },
+            "i18n-es": {
+              "buildTarget": "fastpoke-frontend:build:development,es"
             }
           },
           "defaultConfiguration": "development"
@@ -96,7 +114,8 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/ngx-spinner/animations/ball-scale-multiple.css"
             ],
             "scripts": []
           }

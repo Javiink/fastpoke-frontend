@@ -4,7 +4,7 @@ export const routes: Routes = [
   {
     path: 'entrypoint',
     loadComponent: () =>
-      import('./entrypoint/entrypoint.component').then((x) => x.EntrypointComponent),
+      import('./pages/entrypoint/entrypoint.component').then((x) => x.EntrypointComponent),
   },
 
 
