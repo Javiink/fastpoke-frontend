@@ -5,12 +5,13 @@ import { provideAnimations } from "@angular/platform-browser/animations";
 
 import { routes } from './app.routes';
 import { loadingInterceptor } from './interceptors/loading.interceptor';
+import { apiRequestInterceptor } from './interceptors/api-request.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideHttpClient(withInterceptors([loadingInterceptor])),
+    provideHttpClient(withInterceptors([apiRequestInterceptor, loadingInterceptor])),
     provideAnimations()
   ]
 };
