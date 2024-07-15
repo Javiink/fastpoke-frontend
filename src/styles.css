@@ -3,8 +3,11 @@
 @tailwind components;
 @tailwind utilities;
 
-@media (min-width: 1200px){
+html {
+  font-size: 40px;
+}
+@media (max-width: 768px){
   .kiosk-root{
-    zoom: 60%;
+    zoom: 50%;
   }
 }
