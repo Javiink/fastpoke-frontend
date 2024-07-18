@@ -24,5 +24,8 @@
   },
   "editor.quickSuggestions": {
     "strings": "on"
-  }
+  },
+  "files.exclude": {
+    ".history": true
+  },
 }
