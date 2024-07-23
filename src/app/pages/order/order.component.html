@@ -1,0 +1,14 @@
+<div class="relative h-screen w-screen p-4">
+  <div class="category-navbar w-11/12 m-auto py-4 px-6 flex flex-row cols-2 items-center justify-center bg-sky-100 rounded-full">
+    @for (item of navItems; track item.name) {
+      <a class="relative flex flex-col flex-wrap flex-grow flex-1 items-center justify-center hover:cursor-pointer z-10 after:bg-sky-300 after:-top-[10%] after:-left-[5%] after:rounded-full after:w-[110%] after:h-[120%] after:transition-opacity after:absolute after:opacity-0 after:-z-10"
+      (click)="showCategory(item.path)"
+      [ngClass]="{'after:opacity-100': activeCategory === item.path}">
+        <i class="{{item.icon}} text-4xl"></i>
+        <p class="text-center">{{item.name}}</p>
+      </a>
+    }
+  </div>
+  <div class="items"></div>
+  <div class="cart absolute bottom-0 left-0 w-full h-32 rounded-t-2xl bg-gradient-to-b from-sky-300 to-sky-500"></div>
+</div>
