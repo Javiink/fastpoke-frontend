@@ -1,0 +1,126 @@
+@font-face {
+  font-family: 'fastpoke';
+  src:  url('fastpoke.eot?6sb84o');
+  src:  url('fastpoke.eot?6sb84o#iefix') format('embedded-opentype'),
+    url('fastpoke.ttf?6sb84o') format('truetype'),
+    url('fastpoke.woff?6sb84o') format('woff'),
+    url('fastpoke.svg?6sb84o#fastpoke') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="fpi-"], [class*=" fpi-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'fastpoke' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.fpi-dish-cutlery-sm:before {
+  content: "\e900";
+}
+.fpi-takeout-ok:before {
+  content: "\e901";
+}
+.fpi-eat-location:before {
+  content: "\e902";
+}
+.fpi-noodles:before {
+  content: "\e903";
+}
+.fpi-drink-1:before {
+  content: "\e904";
+}
+.fpi-bowl-1:before {
+  content: "\e905";
+}
+.fpi-chips:before {
+  content: "\e906";
+}
+.fpi-takeout-1:before {
+  content: "\e907";
+}
+.fpi-takeout-2:before {
+  content: "\e908";
+}
+.fpi-bowl-2:before {
+  content: "\e909";
+}
+.fpi-sides-1:before {
+  content: "\e90a";
+}
+.fpi-takeout-9:before {
+  content: "\e90b";
+}
+.fpi-apple:before {
+  content: "\e90c";
+}
+.fpi-takeout-3:before {
+  content: "\e90d";
+}
+.fpi-sides-2:before {
+  content: "\e90e";
+}
+.fpi-bowl-3:before {
+  content: "\e90f";
+}
+.fpi-takeout-4:before {
+  content: "\e910";
+}
+.fpi-sides-3:before {
+  content: "\e911";
+}
+.fpi-takeout-5:before {
+  content: "\e912";
+}
+.fpi-takeout-counter:before {
+  content: "\e913";
+}
+.fpi-sauce:before {
+  content: "\e914";
+}
+.fpi-takeout-6:before {
+  content: "\e915";
+}
+.fpi-takeout-7:before {
+  content: "\e916";
+}
+.fpi-takeout-8:before {
+  content: "\e917";
+}
+.fpi-dish-cutlery-xl:before {
+  content: "\e918";
+}
+.fpi-drink-sides:before {
+  content: "\e919";
+}
+.fpi-sides-4:before {
+  content: "\e91a";
+}
+.fpi-sides-5:before {
+  content: "\e91b";
+}
+.fpi-sides-6:before {
+  content: "\e91c";
+}
+.fpi-drink-2:before {
+  content: "\e91d";
+}
+.fpi-sides-7:before {
+  content: "\e91e";
+}
+.fpi-drink-3:before {
+  content: "\e91f";
+}
+.fpi-drink-4:before {
+  content: "\e920";
+}
