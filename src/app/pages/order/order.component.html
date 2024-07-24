@@ -5,10 +5,17 @@
       (click)="showCategory(item.path)"
       [ngClass]="{'after:opacity-100': activeCategory === item.path}">
         <i class="{{item.icon}} text-4xl"></i>
-        <p class="text-center">{{item.name}}</p>
+        <p class="text-center font-semibold" i18n>{{item.name}}</p>
       </a>
     }
   </div>
   <div class="items"></div>
-  <div class="cart absolute bottom-0 left-0 w-full h-32 rounded-t-2xl bg-gradient-to-b from-sky-300 to-sky-500"></div>
+  <div class="cart absolute bottom-0 left-0 w-full h-20 flex flex-row place-items-center gap-5 rounded-t-3xl bg-gradient-to-b from-sky-500 to-sky-700 py-4 px-6 text-sky-50">
+    <div class="text-xl hover:cursor-pointer"><fa-icon icon="arrow-up-from-bracket"></fa-icon> Review order</div>
+    <div class="ml-auto text-xl">0.00 €</div>
+    <button class="py-1 px-1 rounded-xl font-bold z-10 bg-gradient-to-br from-lime-300 to-lime-600">
+      <span class="flex w-full bg-gradient-to-br from-sky-50 to-sky-100 text-slate-900 rounded-lg p-2 text-3xl">Order</span>
+    </button>
+
+  </div>
 </div>

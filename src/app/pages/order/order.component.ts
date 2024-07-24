@@ -1,10 +1,12 @@
 import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
+import { LogoComponent } from '../../shared/logo/logo.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-order',
   standalone: true,
-  imports: [NgClass],
+  imports: [NgClass, FontAwesomeModule],
   templateUrl: './order.component.html',
   styleUrl: './order.component.css'
 })
