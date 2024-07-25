@@ -7,9 +7,11 @@ export interface Bowl extends OrderItem{
   description?: string;
   allergens?: string[];
   image: string;
-  price?: {
-    medium: number;
-    large: number;
-  };
+  sizes: [
+    {
+      name: string,
+      price: number
+    }
+  ];
   extras?: Ingredient[];
 }
