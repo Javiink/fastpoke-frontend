@@ -7,7 +7,7 @@ import { ImageUrlPipe } from '../../pipes/image-url.pipe';
   standalone: true,
   imports: [ImageUrlPipe],
   template: `
-    <div class="ingredients grid grid-cols-2 gap-x-2 text-sm">
+    <div class="ingredients py-auto grid grid-cols-2 gap-x-2 gap-y-1 text-sm">
       @for (ingredient of ingredients; track ingredient.id) {
         <div class="flex flex-1 w-full gap-2">
           <div class="w-2/12">

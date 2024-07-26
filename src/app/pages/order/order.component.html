@@ -1,20 +1,25 @@
 <div class="relative h-screen w-screen p-4">
   <div class="category-navbar w-11/12 m-auto py-4 px-6 flex flex-row cols-2 items-center justify-center bg-sky-100 rounded-full">
-    @for (item of navItems; track item.name) {
+    @for (item of categories; track item.name) {
       <a class="relative flex flex-col flex-wrap flex-grow flex-1 items-center justify-center hover:cursor-pointer z-10 after:bg-sky-300 after:-top-[10%] after:-left-[5%] after:rounded-full after:w-[110%] after:h-[120%] after:transition-opacity after:absolute after:opacity-0 after:-z-10"
       (click)="showCategory(item.path)"
-      [ngClass]="{'after:opacity-100': activeCategory === item.path}">
+      [ngClass]="{'after:opacity-100': activeCategory.path === item.path}">
         <i class="{{item.icon}} text-4xl"></i>
         <p class="text-center font-semibold" i18n>{{item.name}}</p>
       </a>
     }
   </div>
-  <div class="items"></div>
+  <div class="items mt-5 pb-16 h-4/5 overflow-y-scroll gradient-mask-b-90 scrollbar-hide">
+    <ng-container *ngComponentOutlet="activeCategory.component"></ng-container>
+  </div>
   <div class="cart absolute bottom-0 left-0 w-full h-20 flex flex-row place-items-center gap-5 rounded-t-3xl bg-gradient-to-b from-sky-500 to-sky-700 py-4 px-6 text-sky-50">
     <div class="text-xl hover:cursor-pointer"><fa-icon icon="arrow-up-from-bracket"></fa-icon> Review order</div>
-    <div class="ml-auto text-xl">0.00 €</div>
-    <button class="py-1 px-1 rounded-xl font-bold z-10 bg-gradient-to-br from-lime-300 to-lime-600">
-      <span class="flex w-full bg-gradient-to-br from-sky-50 to-sky-100 text-slate-900 rounded-lg p-2 text-3xl">Order</span>
+    <div class="ml-auto text-xl">Total <span class="font-semibold">{{0 | currency}}</span></div>
+    <button class="py-2 px-2 z-10 absolute left-1/2 -translate-x-1/2 bottom-2 rounded-xl font-bold bg-gradient-to-br from-lime-300 to-lime-600">
+      <span class="flex w-full py-5 px-5 bg-gradient-to-br from-sky-50 to-sky-100 text-slate-900 rounded-lg text-3xl">
+        <span>Order</span>
+        <fa-icon icon="angles-right" class="ml-2 text-2xl place-self-center"></fa-icon>
+      </span>
     </button>
 
   </div>

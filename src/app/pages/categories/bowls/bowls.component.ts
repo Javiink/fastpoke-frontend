@@ -1,21 +1,25 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../../../services/api.service';
 import { Bowl } from '../../../models/bowl';
+import { ItemCardXlComponent } from '../../../shared/cards/item-card-xl/item-card-xl.component';
+import { IngredientsComponent } from '../../../shared/ingredients/ingredients.component';
+import { AllergensComponent } from '../../../shared/allergens/allergens.component';
 
 @Component({
   selector: 'app-bowls',
   standalone: true,
-  imports: [],
+  imports: [ItemCardXlComponent, IngredientsComponent, AllergensComponent],
   templateUrl: './bowls.component.html',
   styleUrl: './bowls.component.css'
 })
 export class BowlsComponent {
 
-  private items?: Bowl[];
+  protected items?: Bowl[];
 
   constructor(private apiService: ApiService){
     this.apiService.get<Bowl[]>('/bowls').subscribe((bowls) => {
       this.items = bowls;
+      console.log(this.items);
     })
   }
 
