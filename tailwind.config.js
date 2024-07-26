@@ -7,6 +7,9 @@ module.exports = {
     extend: {},
     transitionDuration: {DEFAULT: '300ms'}
   },
-  plugins: [],
+  plugins: [
+    require("tailwind-gradient-mask-image"),
+    require('tailwind-scrollbar-hide')
+  ],
 }
 
