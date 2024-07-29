@@ -18,4 +18,5 @@ export class ItemCardMdComponent {
   @Input() allergens?: string[];
   @Input() sizes?: Size[];
   @Input() price?: number;
+  @Input() icon?: string;
 }

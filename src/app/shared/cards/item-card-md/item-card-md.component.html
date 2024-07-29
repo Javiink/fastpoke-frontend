@@ -9,7 +9,7 @@
   <div class="flex flex-col flex-wrap mt-auto">
     <ng-content select=".allergens"></ng-content>
     @if (sizes){
-      <app-size-selector [sizes]="sizes"></app-size-selector>
+      <app-size-selector [sizes]="sizes" [icon]="icon"></app-size-selector>
     } @if (price) {
       <span class="text-center font-semibold text-lg">{{price |currency}}</span>
     }
