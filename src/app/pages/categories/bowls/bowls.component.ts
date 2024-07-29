@@ -19,7 +19,6 @@ export class BowlsComponent {
   constructor(private apiService: ApiService){
     this.apiService.get<Bowl[]>('/bowls').subscribe((bowls) => {
       this.items = bowls;
-      console.log(this.items);
     })
   }
 

@@ -50,11 +50,9 @@ export class OrderComponent {
     },
   ]
 
-  protected activeCategory = this.categories[1];
+  protected activeCategory = this.categories[0];
 
-  constructor() {
-    console.log(this.activeCategory);
-  }
+  constructor() {}
 
   showCategory(path: string) {
     this.activeCategory = this.categories.find(e => e.path == path)!;

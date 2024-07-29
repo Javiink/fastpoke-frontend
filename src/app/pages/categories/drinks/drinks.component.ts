@@ -19,7 +19,6 @@ export class DrinksComponent {
   constructor(private apiService: ApiService) {
     this.apiService.get<Drink[]>('/drinks').subscribe((drinks) => {
       this.items = drinks;
-      console.log(this.items);
     })
   }
 

@@ -19,7 +19,6 @@ export class SidedishesComponent {
   constructor(private apiService: ApiService) {
     this.apiService.get<Sidedish[]>('/sidedishes').subscribe((sides) => {
       this.items = sides;
-      console.log(this.items);
     })
   }
 
