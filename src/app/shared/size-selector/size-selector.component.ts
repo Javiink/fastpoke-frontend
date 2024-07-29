@@ -15,7 +15,7 @@ let count = 0;
         <div>
           <input type="radio" name="{{idKey}}" id="{{idKey}}-{{size.name}}" value="{{size.name}}" class="peer hidden" [attr.checked]="(i == 0) ? 'checked' : null"/>
           <label for="{{idKey}}-{{size.name}}" class="grid cursor-pointer select-none rounded-xl p-1 text-center peer-checked:bg-sky-500 peer-checked:font-normal peer-checked:text-white">
-            <i class="h-6 fpi-bowl-1 text-{{i+2}}xl leading-6"></i>
+            <i class="h-6 {{icon}} text-{{i+2}}xl leading-6"></i>
             <span class="text-xs">{{size.name | titlecase}}</span>
             <span class="font-normal">{{size.price | currency }}</span>
           </label>
@@ -28,7 +28,7 @@ let count = 0;
 
 export class SizeSelectorComponent {
   @Input({ required: true }) sizes: Size[] = [];
-  @Input() icon: string = 'fpi-bowl-1';
+  @Input() icon?: string = 'fpi-bowl-1';
   idKey: string;
 
   constructor(){
