@@ -13,7 +13,7 @@
       @if (sizes){
         <app-size-selector [sizes]="sizes"></app-size-selector>
       } @if (price) {
-        <span class="text-center font-semibold text-lg">{{price |currency}}</span>
+        <span class="block w-full text-center font-semibold text-2xl">{{price |currency}}</span>
       }
       <button class="w-full mt-2 px-2 py-1 rounded-xl bg-gradient-to-br from-lime-300 to-lime-500 text-center font-bold" i18n>Add to order</button>
     </div>
