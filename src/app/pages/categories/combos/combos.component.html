@@ -1,1 +1,39 @@
-<p>combos works!</p>
+@for (item of items; track item.id) {
+  <app-item-card-xl [title]="item.name" [description]="item.description" [image]="item.image" [price]="item.price">
+    <div class="breakdown my-auto">
+      <div class="bowl relative flex flex-row flex-nowrap">
+        <div>
+          <i class="fpi-bowl-1 text-xl mr-2"></i>
+        </div>
+        <div>
+          <span class="text-sm font-semibold self-top mt-1">{{item.bowl.name}} <span class="text-xs font-light">({{item.bowlSize}})</span></span>
+          <p class="text-slate-600 text-xs">{{item.bowl.description}}</p>
+          <button class="text-xs block text-sky-600 peer"><fa-icon icon="circle-info" class="mr-1 text-xs place-self-center"></fa-icon>Ingredients</button>
+          <div class="ingredients-dropdown absolute -left-2 top-6 p-2 z-20 hidden bg-sky-50 rounded-xl border-4 shadow-xl border-sky-200 opacity-0 peer-focus:block peer-focus:opacity-100 transition-opacity">
+            <span class="close absolute -right-2 -top-2 px-1 py-1 -pt-2 aspect-square leading-[0.5rem] text-lg font-bold bg-slate-600 text-white rounded-full border-white border-2 hover:cursor-pointer transition-all">×</span>
+            <app-ingredients [ingredients]="item.bowl.ingredients"></app-ingredients>
+          </div>
+        </div>
+      </div>
+      <div class="mt-3 grid grid-cols-2 gap-5">
+        @if(item.sidedish){
+          <div class="sidedish flex flex-row flex-nowrap">
+            <i class="fpi-sides-1 text-xl mr-2"></i>
+            <span class="text-sm font-semibold self-top mt-1">{{item.sidedish.name}} <span class="text-xs font-light">({{item.sidedishSize}})</span></span>
+          </div>
+        }
+        @if(item.drink){
+          <div class="drink flex flex-row flex-nowrap">
+            <i class="fpi-drink-1 text-xl mr-2"></i>
+            <span class="text-sm font-semibold self-top mt-1">{{item.drink.name}}</span>
+          </div>
+        }
+      </div>
+    </div>
+    <div class="allergens mt-2 mb-3 flex flex-col flex-wrap">
+      @if (item.allergens){
+        <app-allergens [allergens]="item.allergens"></app-allergens>
+      }
+    </div>
+  </app-item-card-xl>
+}
