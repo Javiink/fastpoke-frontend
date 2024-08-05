@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Combo } from '../../../models/combo';
 import { ApiService } from '../../../services/api.service';
 import { ItemCardXlComponent } from '../../../shared/cards/item-card-xl/item-card-xl.component';
-import { IngredientsComponent } from '../../../shared/ingredients/ingredients.component';
+import { IngredientListComponent } from '../../../shared/ingredients/ingredient-list.component';
 import { AllergensComponent } from '../../../shared/allergens/allergens.component';
 import { ImageUrlPipe } from '../../../pipes/image-url.pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -10,7 +10,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 @Component({
   selector: 'app-combos',
   standalone: true,
-  imports: [ItemCardXlComponent, IngredientsComponent, AllergensComponent, ImageUrlPipe, FontAwesomeModule],
+  imports: [ItemCardXlComponent, IngredientListComponent, AllergensComponent, ImageUrlPipe, FontAwesomeModule],
   templateUrl: './combos.component.html',
   styleUrl: './combos.component.css'
 })

@@ -1,7 +1,7 @@
 @for (item of items; track item.id) {
   <app-item-card-xl [title]="item.name" [description]="item.description" [image]="item.image" [sizes]="item.sizes">
     <div class="breakdown my-auto">
-      <app-ingredients [ingredients]="item.ingredients"></app-ingredients>
+      <app-ingredient-list [ingredients]="item.ingredients"></app-ingredient-list>
     </div>
     <div class="allergens mt-2 mb-3 flex flex-col flex-wrap">
       @if (item.allergens){

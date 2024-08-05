@@ -3,7 +3,7 @@ import { Ingredient } from '../../models/ingredient';
 import { ImageUrlPipe } from '../../pipes/image-url.pipe';
 
 @Component({
-  selector: 'app-ingredients',
+  selector: 'app-ingredient-list',
   standalone: true,
   imports: [ImageUrlPipe],
   template: `
@@ -20,7 +20,7 @@ import { ImageUrlPipe } from '../../pipes/image-url.pipe';
   `,
   styles: ''
 })
-export class IngredientsComponent {
+export class IngredientListComponent {
 
   @Input({required: true}) ingredients: Ingredient[] = [];
 
