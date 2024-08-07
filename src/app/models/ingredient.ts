@@ -9,3 +9,5 @@ export interface Ingredient {
 }
 
 export type IngredientSlots = 'base' | 'sauce' | 'protein' | 'topping' | 'sprinkle';
+
+export type SelectableIngredient = Ingredient & { quantity?: number, selected?: boolean }

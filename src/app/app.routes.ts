@@ -1,10 +1,16 @@
 import { Routes } from '@angular/router';
+import { OrderComponent } from './pages/order/order.component';
 
 export const routes: Routes = [
   {
     path: 'entrypoint',
     loadComponent: () =>
       import('./pages/entrypoint/entrypoint.component').then((x) => x.EntrypointComponent),
+  },
+  {
+    path: 'order',
+    loadComponent: () =>
+      import('./pages/order/order.component').then((x) => x.OrderComponent),
   },
 
 

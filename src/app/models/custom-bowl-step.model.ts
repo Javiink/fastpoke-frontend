@@ -1,10 +1,16 @@
-import { Component, ComponentDecorator, Type } from "@angular/core";
+import { Type } from "@angular/core";
+import { IngredientSlots } from "./ingredient";
 
 export interface CustomBowlStep {
+  label: string;
   title: string;
-  component: Type<any>;
   path: string;
   stepIndex: number;
   isComplete?: boolean;
+  selectorType: 'quantity' | 'selectable';
+}
+export interface CustomBowlAdjacentSteps {
+  prev: CustomBowlStep | null,
+  next: CustomBowlStep | null
 }
 

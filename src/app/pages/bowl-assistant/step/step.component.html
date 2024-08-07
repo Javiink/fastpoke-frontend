@@ -1,0 +1,58 @@
+<div class="size-full">
+  <div class="w-full text-center pt-2 pb-4">
+    <h1 class="text-3xl mb-2 font-bold" i18n>{{stepData.title}}</h1>
+  </div>
+  @if(stepData.path != 'size'){
+    <div class="grid grid-cols-3 gap-3 pb-16 h-4/5 overflow-y-scroll scrollbar-hide gradient-mask-b-90">
+      @for(ingredient of ingredients; track ingredient.id){
+        <div [ngClass]="{'!to-sky-200': ingredient.selected}"
+        (click)="selectIngredient(ingredient)"
+        class="size-full px-2 py-3 flex flex-col flex-wrap items-center justify-center rounded-xl bg-gradient-to-br from-white to-sky-50 shadow-md">
+          <div class="aspect-square max-w-[60%]">
+            <img src="{{ingredient.image | imageUrl}}" alt="">
+          </div>
+          <div class="text-center">
+            <h1 class="text-lg font-semibold">{{ingredient.name}}</h1>
+            <h4 class="text-xs font-light text-slate-700">{{ingredient.description}}</h4>
+          </div>
+          <div class="mt-auto w-full pt-2 px-2 text-center">
+            <span class="hidden">{{ingredient.price | currency}}</span>
+            @if(stepData.selectorType == 'quantity'){
+            <div class="flex flex-row flex-nowrap mt-2">
+              <button class="block w-1/4 aspect-square rounded-full bg-rose-400 disabled:bg-transparent disabled:border-2 disabled:border-rose-200 disabled:text-slate-400" (click)="ingredientQty(ingredient, false)" [disabled]="ingredient.quantity! < 1 || (selectedIngredients.length >= maxCustomDistinctIngredients && !ingredient.selected)"><fa-icon icon="minus" class="leading-[0]"></fa-icon></button>
+              <span class="w-2/4 font-semibold text-lg">{{ingredient.quantity}}</span>
+              <button class="block w-1/4 aspect-square rounded-full bg-lime-400 disabled:bg-transparent disabled:border-2 disabled:border-lime-200 disabled:text-slate-400" (click)="ingredientQty(ingredient, true)" [disabled]="ingredient.quantity! >= maxSelectableNumber || (selectedIngredients.length >= maxCustomDistinctIngredients && !ingredient.selected)"><fa-icon icon="plus" class="leading-[0]"></fa-icon></button>
+            </div>
+            }
+            @if(stepData.selectorType == 'selectable'){
+              <button class="block w-full rounded-lg bg-lime-400 border-2 border-lime-600 disabled:bg-lime-100 disabled:border-lime-200 disabled:text-slate-400"
+              [ngClass]="{'bg-lime-600 text-white': ingredient.selected}"
+              [disabled]="selectedIngredients.length >= maxCustomDistinctIngredients && !ingredient.selected"
+              i18n>{{(ingredient.selected? 'Selected' : 'Select')}}</button>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  }
+  @else {
+    <div class="size-full mt-40">
+      <div class="flex flex-wrap gap-4 cols-2 justify-center">
+        <input type="radio" id="size-medium" value="medium" formControlName="size" class="hidden">
+        <label for="size-medium" class="flex-grow flex-1">
+          <button class="px-8 py-12 flex flex-col flex-wrap items-center justify-center rounded-xl w-full bg-gradient-to-br from-white to-sky-50 active:to-sky-200 hover:to-sky-200 shadow-xl focus:to-sky-300">
+            <i class="fpi-bowl-1 text-5xl leading-8"></i>
+            <p class="mt-4 text-xl">Medium</p>
+          </button>
+        </label>
+        <input type="radio" id="size-large" value="large" formControlName="size" class="hidden">
+        <label for="size-large" class="flex-grow flex-1">
+          <button class="px-8 py-12 flex flex-col flex-wrap items-center justify-center rounded-xl w-full bg-gradient-to-br from-white to-sky-50 active:to-sky-200 hover:to-sky-200 shadow-xl focus:to-sky-300">
+            <i class="fpi-bowl-1 text-6xl leading-8"></i>
+            <p class="mt-4 text-xl">Large</p>
+          </button>
+        </label>
+      </div>
+    </div>
+  }
+</div>
