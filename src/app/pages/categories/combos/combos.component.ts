@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Combo } from '../../../models/combo';
 import { ApiService } from '../../../services/api.service';
 import { ItemCardXlComponent } from '../../../shared/cards/item-card-xl/item-card-xl.component';
-import { IngredientListComponent } from '../../../shared/ingredients/ingredient-list.component';
+import { IngredientListComponent } from '../../../shared/ingredient-list/ingredient-list.component';
 import { AllergensComponent } from '../../../shared/allergens/allergens.component';
 import { ImageUrlPipe } from '../../../pipes/image-url.pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
