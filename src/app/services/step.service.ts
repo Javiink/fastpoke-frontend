@@ -6,8 +6,9 @@ const emptyStep: CustomBowlStep = {
   label: '',
   title: '',
   path: 'size',
-  stepIndex: 0,
-  selectorType: 'selectable'
+  index: 0,
+  selectorType: 'selectable',
+  completed: false,
 };
 
 @Injectable({
@@ -54,19 +55,32 @@ export class StepsService {
     }
 
     if (!this.isFirstStep()) {
-      adjacentSteps.prev = this.steps$.value[this.currentStep$.value.stepIndex - 1]
+      adjacentSteps.prev = this.steps$.value[this.currentStep$.value.index - 1]
     }
 
     if (!this.isLastStep()) {
-      adjacentSteps.next = this.steps$.value[this.currentStep$.value.stepIndex + 1]
+      adjacentSteps.next = this.steps$.value[this.currentStep$.value.index + 1]
     }
 
     this.adjacentSteps$.next(adjacentSteps);
 
   }
 
+  completeCurrentStep(){
+    const currStep = this.currentStep$.value;
+    currStep.completed = true;
+    this.currentStep$.next(currStep);
+  }
+
+  uncompleteCurrentStep(){
+    const currStep = this.currentStep$.value;
+    currStep.completed = false;
+    this.currentStep$.next(currStep);
+  }
+
   moveToNextStep(): void {
-    const index = this.currentStep$.value.stepIndex;
+    const index = this.currentStep$.value.index;
+
 
     if (index < this.steps$.value.length) {
       this.setCurrentStep(this.steps$.value[index + 1]);
@@ -75,7 +89,7 @@ export class StepsService {
   }
 
   moveToPreviousStep(): void {
-    const index = this.currentStep$.value.stepIndex;
+    const index = this.currentStep$.value.index;
 
     if (index > 0) {
       this.setCurrentStep(this.steps$.value[index - 1]);
@@ -84,11 +98,13 @@ export class StepsService {
   }
 
   isFirstStep(): boolean {
-    return this.currentStep$.value.stepIndex === 0;
+    return this.currentStep$.value.index === 0;
   }
 
   isLastStep(): boolean {
-    return this.currentStep$.value.stepIndex === this.steps$.value.length;
+    console.log(this.currentStep$.value.index);
+    console.log(this.steps$.value.length -1);
+    return this.currentStep$.value.index === this.steps$.value.length -1;
   }
 
 }
