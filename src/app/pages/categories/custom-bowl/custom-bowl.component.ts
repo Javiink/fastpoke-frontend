@@ -15,43 +15,49 @@ const initSteps: CustomBowlStep[] = [
     label: $localize`Bowl size`,
     title: $localize `What size will it be?`,
     path: 'size',
-    stepIndex: 0,
-    selectorType: 'selectable'
+    index: 0,
+    selectorType: 'selectable',
+    completed: false,
   },
   {
     label: $localize `Base`,
     title: $localize `Select the base`,
     path: 'base',
-    stepIndex: 1,
-    selectorType: 'selectable'
+    index: 1,
+    selectorType: 'selectable',
+    completed: false,
   },
   {
     label: $localize`Sauce`,
     title: $localize `Put some sauce in it!`,
     path: 'sauce',
-    stepIndex: 2,
-    selectorType: 'selectable'
+    index: 2,
+    selectorType: 'selectable',
+    completed: false,
   },
   {
     label: $localize`Protein`,
     title: $localize `The main component of the bowl`,
     path: 'protein',
-    stepIndex: 3,
-    selectorType: 'quantity'
+    index: 3,
+    selectorType: 'selectable',
+    completed: false,
   },
   {
     label: $localize`Toppings`,
     title: $localize `Throw more ingredients! `,
     path: 'topping',
-    stepIndex: 4,
-    selectorType: 'quantity'
+    index: 4,
+    selectorType: 'selectable',
+    completed: false,
   },
   {
     label: $localize`Sprinkle`,
     title: $localize `Finish with the decorations`,
     path: 'sprinkle',
-    stepIndex: 5,
-    selectorType: 'selectable'
+    index: 5,
+    selectorType: 'selectable',
+    completed: false,
   },
 ]
 @Component({
@@ -110,6 +116,8 @@ export class CustomBowlComponent {
   currentStep: Observable<CustomBowlStep>;
   adjacentSteps: Observable<CustomBowlAdjacentSteps>;
 
+  isLastStep: boolean = false;
+
   constructor(private stepService: StepsService){
     this.stepService.setSteps(initSteps);
     this.steps = this.stepService.getSteps();
@@ -121,10 +129,20 @@ export class CustomBowlComponent {
 
   prevStep(){
     this.stepService.moveToPreviousStep();
+    this.checkLastStep();
   }
 
   nextStep(){
     this.stepService.moveToNextStep();
+    this.checkLastStep();
+  }
+
+  checkLastStep(){
+    if (this.stepService.isLastStep()) {
+      this.isLastStep = true;
+    } else {
+      this.isLastStep = false;
+    }
   }
 
 }

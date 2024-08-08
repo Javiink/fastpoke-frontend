@@ -2,10 +2,10 @@
   <app-step-tabs></app-step-tabs>
 
   <div class="size-full" >
-    @for(step of (steps | async); track step.stepIndex; let i = $index){
-      <!-- <div [@slideAnimation]="(currentStep | async)?.stepIndex == i" [ngClass]="{'!opacity-100': (currentStep |async)?.stepIndex === i}" -->
-      <!-- <div [ngClass]="{'!opacity-100': (currentStep |async)?.stepIndex === i}" -->
-      <div [ngClass]="{'!block': (currentStep |async)?.stepIndex === i}" class="hidden px-6 size-full transition-all">
+    @for(step of (steps | async); track step.index; let i = $index){
+      <!-- <div [@slideAnimation]="(currentStep | async)?.index == i" [ngClass]="{'!opacity-100': (currentStep |async)?.index === i}" -->
+      <!-- <div [ngClass]="{'!opacity-100': (currentStep |async)?.index === i}" -->
+      <div [ngClass]="{'!block': (currentStep |async)?.index === i}" class="hidden px-6 size-full transition-all">
       <!--   <ng-container *ngComponentOutlet="step.component"></ng-container> -->
         <app-step [stepData]="step"></app-step>
       </div>
@@ -21,9 +21,15 @@
       </button>
     }
     @if((adjacentSteps | async)?.next){
-      <button class="flex p-3 w-2/6 ml-auto bg-lime-300 rounded-xl" (click)="nextStep()" i18n>
+      <button class="flex p-3 w-2/6 ml-auto bg-lime-300 rounded-xl ring-inset disabled:ring-2 disabled:ring-lime-300 disabled:!bg-lime-50" (click)="nextStep()" [disabled]="!(currentStep | async)?.completed" i18n>
         <span class="mx-auto text-xl leading-5">{{(adjacentSteps | async)?.next?.label}}</span>
         <fa-icon icon="angle-right" class="ml-0 text-2xl leading-5"></fa-icon>
+      </button>
+    }
+    @if(isLastStep && (currentStep | async)?.completed){
+      <button class="flex p-3 w-2/6 ml-auto bg-lime-300 rounded-xl ring-inset disabled:ring-2 disabled:ring-lime-300 disabled:!bg-lime-50" [disabled]="!(currentStep | async)?.completed" i18n>
+        <span class="mx-auto text-xl leading-5">Add to order</span>
+        <fa-icon icon="basket-shopping" class="ml-0 text-xl leading-5"></fa-icon>
       </button>
     }
   </div>
