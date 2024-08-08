@@ -23,7 +23,7 @@ import { Component, Input } from '@angular/core';
         @for (allergen of allergens; track allergen) {
           <div class="relative group block w-5 aspect-square mb-1">
             <img class="w-full" src="/images/allergens/allergen-{{allergen}}.svg" alt="">
-            <div role="tooltip" class="absolute w-16 px-2 py-1 z-[1] pointer-events-none shadow-md text-center font-light text-sm bg-slate-950 bg-opacity-90 text-white rounded-lg top-full -left-full opacity-0 transition-opacity group-hover:opacity-100">
+            <div role="tooltip" class="absolute w-16 px-2 py-1 z-[1] pointer-events-none shadow-md text-center font-light text-sm bg-slate-950 bg-opacity-90 text-white rounded-lg -top-1/3 -left-[300%] opacity-0 transition-opacity group-hover:opacity-100">
               {{allergen | titlecase}}
             </div>
           </div>
