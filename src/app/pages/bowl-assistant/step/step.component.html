@@ -1,13 +1,19 @@
 <div class="size-full">
   <div class="w-full text-center pt-2 pb-4">
     <h1 class="text-3xl mb-2 font-bold" i18n>{{stepData.title}}</h1>
+    <span i18n>You have selected {{selectedIngredients.length}} of {{maxCustomDistinctIngredients}} options</span>
   </div>
   @if(stepData.path != 'size'){
     <div class="grid grid-cols-3 gap-3 pb-16 h-4/5 overflow-y-scroll scrollbar-hide gradient-mask-b-90">
       @for(ingredient of ingredients; track ingredient.id){
-        <div [ngClass]="{'!to-sky-200': ingredient.selected}"
+        <div [ngClass]="{'!to-sky-200 ring-inset ring-4 ring-lime-400': ingredient.selected}"
         (click)="selectIngredient(ingredient)"
-        class="size-full px-2 py-3 flex flex-col flex-wrap items-center justify-center rounded-xl bg-gradient-to-br from-white to-sky-50 shadow-md">
+        class="relative size-full px-2 py-3 flex flex-col flex-wrap items-center justify-center rounded-xl bg-gradient-to-br from-white to-sky-50 shadow-md">
+        @if (ingredient.allergens) {
+          <div class="allergens absolute top-3 right-0 w-[20%]">
+            <app-allergens orientation="vertical" [allergens]="ingredient.allergens" class="mx-auto"></app-allergens>
+          </div>
+        }
           <div class="aspect-square max-w-[60%]">
             <img src="{{ingredient.image | imageUrl}}" alt="">
           </div>
@@ -19,16 +25,28 @@
             <span class="hidden">{{ingredient.price | currency}}</span>
             @if(stepData.selectorType == 'quantity'){
             <div class="flex flex-row flex-nowrap mt-2">
-              <button class="block w-1/4 aspect-square rounded-full bg-rose-400 disabled:bg-transparent disabled:border-2 disabled:border-rose-200 disabled:text-slate-400" (click)="ingredientQty(ingredient, false)" [disabled]="ingredient.quantity! < 1 || (selectedIngredients.length >= maxCustomDistinctIngredients && !ingredient.selected)"><fa-icon icon="minus" class="leading-[0]"></fa-icon></button>
+              <button class="block w-1/4 aspect-square rounded-full bg-rose-400 disabled:bg-transparent disabled:border-2 disabled:border-rose-200 disabled:text-slate-400"
+              (click)="ingredientQty(ingredient, false)" [disabled]="ingredient.quantity! < 1 || (selectedIngredients.length >= maxCustomDistinctIngredients && !ingredient.selected)">
+                <fa-icon icon="minus" class="leading-[0]"></fa-icon>
+              </button>
               <span class="w-2/4 font-semibold text-lg">{{ingredient.quantity}}</span>
-              <button class="block w-1/4 aspect-square rounded-full bg-lime-400 disabled:bg-transparent disabled:border-2 disabled:border-lime-200 disabled:text-slate-400" (click)="ingredientQty(ingredient, true)" [disabled]="ingredient.quantity! >= maxSelectableNumber || (selectedIngredients.length >= maxCustomDistinctIngredients && !ingredient.selected)"><fa-icon icon="plus" class="leading-[0]"></fa-icon></button>
+              <button class="block w-1/4 aspect-square rounded-full bg-lime-400 disabled:bg-transparent disabled:border-2 disabled:border-lime-200 disabled:text-slate-400"
+              (click)="ingredientQty(ingredient, true)" [disabled]="(selectedIngredients.length >= maxCustomDistinctIngredients && !ingredient.selected)">
+                <fa-icon icon="plus" class="leading-[0]"></fa-icon></button>
             </div>
             }
             @if(stepData.selectorType == 'selectable'){
-              <button class="block w-full rounded-lg bg-lime-400 border-2 border-lime-600 disabled:bg-lime-100 disabled:border-lime-200 disabled:text-slate-400"
-              [ngClass]="{'bg-lime-600 text-white': ingredient.selected}"
-              [disabled]="selectedIngredients.length >= maxCustomDistinctIngredients && !ingredient.selected"
-              i18n>{{(ingredient.selected? 'Selected' : 'Select')}}</button>
+              @if (ingredient.selected) {
+                <button class="flex p-2 w-full text-lime-600 font-semibold">
+                  <fa-icon icon="circle-check" class="ml-0 mr-auto text-2xl leading-[0]"></fa-icon>
+                  <span class="mx-auto">Selected!</span>
+                </button>
+              } @else {
+                <button class="flex p-2 w-full disabled:text-slate-300" [disabled]="selectedIngredients.length >= maxCustomDistinctIngredients && !ingredient.selected">
+                  <fa-icon [icon]="['far', 'circle']" class="ml-0 mr-auto text-2xl leading-[0]"></fa-icon>
+                  <span class="mx-auto">Select</span>
+                </button>
+              }
             }
           </div>
         </div>
@@ -38,20 +56,22 @@
   @else {
     <div class="size-full mt-40">
       <div class="flex flex-wrap gap-4 cols-2 justify-center">
-        <input type="radio" id="size-medium" value="medium" formControlName="size" class="hidden">
-        <label for="size-medium" class="flex-grow flex-1">
-          <button class="px-8 py-12 flex flex-col flex-wrap items-center justify-center rounded-xl w-full bg-gradient-to-br from-white to-sky-50 active:to-sky-200 hover:to-sky-200 shadow-xl focus:to-sky-300">
+        <div class="flex-grow flex-1">
+          <button class="px-8 py-12 flex flex-col flex-wrap items-center justify-center rounded-xl w-full bg-gradient-to-br from-white to-sky-50 shadow-xl"
+          [ngClass]="{'ring-inset ring-4 ring-lime-400 !to-sky-200': selectedSize == 'medium'}"
+          (click)="selectSize('medium')">
             <i class="fpi-bowl-1 text-5xl leading-8"></i>
             <p class="mt-4 text-xl">Medium</p>
           </button>
-        </label>
-        <input type="radio" id="size-large" value="large" formControlName="size" class="hidden">
-        <label for="size-large" class="flex-grow flex-1">
-          <button class="px-8 py-12 flex flex-col flex-wrap items-center justify-center rounded-xl w-full bg-gradient-to-br from-white to-sky-50 active:to-sky-200 hover:to-sky-200 shadow-xl focus:to-sky-300">
+        </div>
+        <div class="flex-grow flex-1">
+          <button class="px-8 py-12 flex flex-col flex-wrap items-center justify-center rounded-xl w-full bg-gradient-to-br from-white to-sky-50 shadow-xl"
+          [ngClass]="{'ring-inset ring-4 ring-lime-400 !to-sky-200': selectedSize == 'large'}"
+          (click)="selectSize('large')">
             <i class="fpi-bowl-1 text-6xl leading-8"></i>
             <p class="mt-4 text-xl">Large</p>
           </button>
-        </label>
+        </div>
       </div>
     </div>
   }
