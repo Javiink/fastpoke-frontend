@@ -1,11 +1,18 @@
 <div class="step-tabs w-full flex gap-4 justify-between px-2 mb-3">
-  @for (step of (steps | async); track step.stepIndex; let i = $index;){
-    <div (click)="onStepClick(step)" class="text-center flex-1 cursor-pointer">
-      <div [ngClass]="{ '!bg-green-500': step.isComplete, 'bg-slate-200': !step.isComplete, '!bg-sky-300': (currentStep | async)?.stepIndex === step.stepIndex }"
-      class="step-bubble w-10 p-1 mx-auto aspect-square rounded-full text-center border-2 border-slate-900">
-        <span class="text-xl">{{ step.stepIndex }}</span>
+  @for (step of (steps | async); track step.index; let i = $index;){
+    <div class="text-center flex-1">
+      <div class="step-bubble w-10 mx-auto aspect-square text-center">
+        @if ((currentStep | async)?.index == i && !step.completed) {
+          <fa-icon [icon]="['fas', 'circle-dot']" class="leading-[0] text-4xl text-sky-400"></fa-icon>
+        }
+        @if (step.completed) {
+          <fa-icon [icon]="['fas', 'circle-check']" class="leading-[0] text-4xl text-lime-500"></fa-icon>
+        }
+        @if (!step.completed && (currentStep | async)?.index != i) {
+          <fa-icon [icon]="['fas', 'circle']" class="leading-[0] text-4xl text-slate-300"></fa-icon>
+        }
       </div>
-      <span class="text-sm">{{step.label}}</span>
+      <span class="text-sm" [ngClass]="{'font-bold': (currentStep | async)?.index == i}">{{step.label}}</span>
     </div>
   }
 </div>

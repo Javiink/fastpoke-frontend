@@ -3,11 +3,12 @@ import { Observable } from 'rxjs';
 import { CustomBowlStep } from '../../../models/custom-bowl-step.model';
 import { StepsService } from '../../../services/step.service';
 import { AsyncPipe, NgClass } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-step-tabs',
   standalone: true,
-  imports: [AsyncPipe, NgClass],
+  imports: [AsyncPipe, NgClass, FontAwesomeModule],
   templateUrl: './step-tabs.component.html',
   styles: ``
 })
