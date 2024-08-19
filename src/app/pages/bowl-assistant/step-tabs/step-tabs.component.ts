@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CustomBowlStep } from '../../../models/custom-bowl-step.model';
+import { CustomBowlStep } from '../../../models/custom-bowl-step';
 import { StepsService } from '../../../services/step.service';
 import { AsyncPipe, NgClass } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';

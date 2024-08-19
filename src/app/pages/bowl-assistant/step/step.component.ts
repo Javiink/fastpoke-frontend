@@ -3,7 +3,7 @@ import { CurrencyPipe, NgClass } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { ApiService } from '../../../services/api.service';
-import { CustomBowlStep } from '../../../models/custom-bowl-step.model';
+import { CustomBowlStep } from '../../../models/custom-bowl-step';
 import { SelectableIngredient } from '../../../models/ingredient';
 import { environment } from '../../../../environments/environment';
 import { ImageUrlPipe } from '../../../pipes/image-url.pipe';

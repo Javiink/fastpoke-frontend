@@ -1,6 +1,6 @@
 import { Injectable, Type } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { CustomBowlAdjacentSteps, CustomBowlStep } from '../models/custom-bowl-step.model';
+import { CustomBowlAdjacentSteps, CustomBowlStep } from '../models/custom-bowl-step';
 
 const emptyStep: CustomBowlStep = {
   label: '',

@@ -1,21 +1,23 @@
 import { Injectable } from '@angular/core';
 import { OrderItem } from '../models/order-item';
+import { CustomBowl } from '../models/custom-bowl';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
-  items: OrderItem[] = [];
-  takeout: boolean = false;
+  items: (OrderItem | CustomBowl)[] = [];
+  takeOut: boolean = false;
+  total: number = 0;
 
   constructor() { }
 
-  setEatin(){
-    this.takeout = false;
+  setEatIn(){
+    this.takeOut = false;
   }
 
-  setTakeout(){
-    this.takeout = true;
+  setTakeOut(){
+    this.takeOut = true;
   }
 
 }

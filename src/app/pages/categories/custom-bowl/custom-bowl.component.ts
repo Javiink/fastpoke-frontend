@@ -4,7 +4,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { animate, query, state, style, transition, trigger } from '@angular/animations';
 import { Observable } from 'rxjs';
 
-import { CustomBowlAdjacentSteps, CustomBowlStep } from '../../../models/custom-bowl-step.model';
+import { CustomBowlAdjacentSteps, CustomBowlStep } from '../../../models/custom-bowl-step';
 import { StepsService } from '../../../services/step.service';
 import { StepTabsComponent } from '../../bowl-assistant/step-tabs/step-tabs.component';
 import { StepComponent } from '../../bowl-assistant/step/step.component';
