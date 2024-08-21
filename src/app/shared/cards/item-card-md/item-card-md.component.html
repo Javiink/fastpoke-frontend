@@ -1,4 +1,5 @@
-<div class="flex flex-col h-full mb-2 rounded-lg p-2 bg-gradient-to-br from-sky-50 to-sky-100">
+<div class="relative flex flex-col h-full mb-2 rounded-lg p-2 bg-gradient-to-br from-sky-50 to-sky-100">
+  <ng-content select=".allergens"></ng-content>
   <div class="aspect-square p-1">
     <img class="block w-full place-self-center" src="{{image | imageUrl}}">
   </div>
@@ -7,7 +8,6 @@
     <p class="mb-2 text-xs text-slate-600">{{description}}</p>
   </div>
   <div class="flex flex-col flex-wrap mt-auto">
-    <ng-content select=".allergens"></ng-content>
     @if (sizes){
       <app-size-selector [sizes]="sizes" [icon]="icon"></app-size-selector>
     } @if (price) {

@@ -2,8 +2,8 @@
   @for (item of items; track item.id) {
     <app-item-card-md [title]="item.name" [description]="item.description" [image]="item.image" [sizes]="item.sizes" icon="fpi-sides-1">
       @if (item.allergens && item.allergens.length > 0){
-        <div class="allergens mb-2 flex flex-col flex-wrap">
-          <app-allergens [allergens]="item.allergens"></app-allergens>
+        <div class="allergens absolute top-3 right-0 w-[20%]">
+          <app-allergens orientation="vertical" [allergens]="item.allergens" class="mx-auto"></app-allergens>
         </div>
       }
     </app-item-card-md>
