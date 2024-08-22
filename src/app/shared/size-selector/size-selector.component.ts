@@ -14,7 +14,7 @@ let count = 0;
       @for (size of sizes; track size; let i = $index){
         <div>
           <input type="radio" name="{{idKey}}" id="{{idKey}}-{{size.name}}" value="{{size.name}}" class="peer hidden" [attr.checked]="(i == 0) ? 'checked' : null"/>
-          <label for="{{idKey}}-{{size.name}}" class="grid cursor-pointer select-none rounded-xl p-1 text-center peer-checked:bg-sky-500 peer-checked:font-normal peer-checked:text-white">
+          <label for="{{idKey}}-{{size.name}}" class="grid cursor-pointer select-none rounded-xl p-1 text-center transition-all peer-checked:bg-sky-500 peer-checked:font-normal peer-checked:text-white">
             <i class="h-6 {{icon}} text-{{i+2}}xl leading-6"></i>
             <span class="text-xs">{{size.name | titlecase}}</span>
             <span class="font-normal">{{size.price | currency }}</span>
