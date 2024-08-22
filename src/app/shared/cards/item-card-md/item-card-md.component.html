@@ -1,8 +1,8 @@
 <div class="relative flex flex-col h-full mb-2 rounded-lg p-2 bg-gradient-to-br from-sky-50 to-sky-100">
-  <ng-content select=".allergens"></ng-content>
   <div class="aspect-square p-1">
     <img class="block w-full place-self-center drop-shadow-lg shadow-black" src="{{image | imageUrl}}">
   </div>
+  <ng-content select=".allergens"></ng-content>
   <div class="relative flex flex-col">
     <p class="font-bold leading-4 mb-2">{{title}}</p>
     <p class="mb-2 text-xs text-slate-600">{{description}}</p>
