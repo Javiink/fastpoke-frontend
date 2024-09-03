@@ -7,13 +7,15 @@ import { SidedishesComponent } from '../categories/sidedishes/sidedishes.compone
 import { CustomBowlComponent } from '../categories/custom-bowl/custom-bowl.component';
 import { DrinksComponent } from '../categories/drinks/drinks.component';
 import { ItemCardXlComponent } from '../../shared/cards/item-card-xl/item-card-xl.component';
+import { ModalService } from '../../services/modal.service';
+
 
 @Component({
   selector: 'app-order',
   standalone: true,
   imports: [NgClass, NgComponentOutlet, CurrencyPipe, FontAwesomeModule, CombosComponent, BowlsComponent, SidedishesComponent, CustomBowlComponent, DrinksComponent, ItemCardXlComponent],
   templateUrl: './order.component.html',
-  styleUrl: './order.component.css'
+  styleUrls: ['./order.component.css'],
 })
 export class OrderComponent {
 
@@ -50,13 +52,16 @@ export class OrderComponent {
     },
   ]
 
-  protected activeCategory = this.categories[0];
+  protected activeCategory = this.categories[1];
 
-  constructor() {}
+  constructor(private modalService: ModalService) {}
 
   showCategory(path: string) {
     this.activeCategory = this.categories.find(e => e.path == path)!;
   }
 
-  renderItemsComponent(path: string) { }
+  showOrderReview(){
+    this.modalService.show($localize`Your order`);
+  }
+
 }
