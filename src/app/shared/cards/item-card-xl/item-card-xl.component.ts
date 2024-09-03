@@ -1,8 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { SizeSelectorComponent } from '../../size-selector/size-selector.component';
 import { ImageUrlPipe } from '../../../pipes/image-url.pipe';
-import { Size } from '../../../models/size';
 import { CurrencyPipe } from '@angular/common';
+import { ItemCardComponent } from '../item-card.component';
 
 @Component({
   selector: 'app-item-card-xl',
@@ -11,12 +11,6 @@ import { CurrencyPipe } from '@angular/common';
   templateUrl: './item-card-xl.component.html',
   styles: ''
 })
-export class ItemCardXlComponent {
-  @Input({ required: true }) title: string = '';
-  @Input({ required: true }) image: string = '';
-  @Input() description?: string;
-  @Input() allergens?: string[];
-  @Input() sizes?: Size[];
-  @Input() price?: number;
+export class ItemCardXlComponent extends ItemCardComponent{
 
 }
