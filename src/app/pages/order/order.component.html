@@ -14,13 +14,12 @@
   </div>
   <div class="cart absolute bottom-0 left-0 w-full h-20 flex flex-row place-items-center gap-5 rounded-t-3xl bg-gradient-to-b from-sky-500 to-sky-700 py-4 px-6 text-sky-50">
     <div class="text-xl hover:cursor-pointer"><fa-icon icon="arrow-up-from-bracket"></fa-icon> Review order</div>
-    <div class="ml-auto text-xl">Total <span class="font-semibold">{{0 | currency}}</span></div>
-    <button class="py-2 px-2 z-10 absolute left-1/2 -translate-x-1/2 bottom-2 rounded-xl font-bold bg-gradient-to-br from-lime-300 to-lime-600">
+    <div class="ml-auto text-xl">Total <span class="font-semibold">{{(orderTotal | async) | currency}}</span></div>
+    <button class="py-2 px-2 z-10 absolute left-1/2 -translate-x-1/2 bottom-2 rounded-xl font-bold bg-gradient-to-br from-lime-300 to-lime-600" (click)="showOrderReview()">
       <span class="flex w-full py-5 px-5 bg-gradient-to-br from-sky-50 to-sky-100 text-slate-900 rounded-lg text-3xl">
         <span>Order</span>
         <fa-icon icon="angles-right" class="ml-2 text-2xl place-self-center"></fa-icon>
       </span>
     </button>
-
   </div>
 </div>
