@@ -1,5 +1,5 @@
 @for (item of items; track item.id) {
-  <app-item-card-xl [title]="item.name" [description]="item.description" [image]="item.image" [sizes]="item.sizes">
+  <app-item-card-xl [item]="item" [sizes]="item.sizes" category="bowls">
     <div class="breakdown my-auto">
       <app-ingredient-list [ingredients]="item.ingredients"></app-ingredient-list>
     </div>

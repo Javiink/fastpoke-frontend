@@ -1,6 +1,6 @@
 <div class="grid grid-cols-3 gap-x-2 gap-y-1">
   @for (item of items; track item.id) {
-    <app-item-card-md [title]="item.name" [description]="item.description" [image]="item.image" [sizes]="item.sizes" icon="fpi-sides-1">
+    <app-item-card-md [item]="item" [sizes]="item.sizes" category="sidedishes" icon="fpi-sides-1">
       @if (item.allergens && item.allergens.length > 0){
         <div class="allergens absolute top-3 right-0 w-[20%]">
           <app-allergens orientation="vertical" [allergens]="item.allergens" class="mx-auto"></app-allergens>
