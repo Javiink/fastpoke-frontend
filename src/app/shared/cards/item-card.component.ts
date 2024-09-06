@@ -6,12 +6,9 @@ import { Size } from '../../models/size';
 @Directive({
   selector: 'app-item-card',
 })
-export class ItemCardComponent implements OnInit {
-  @Input({ required: true }) title: string = '';
-  @Input({ required: true }) image: string = '';
+export class ItemCardComponent {
+  @Input({ required: true }) item!: OrderItem;
   @Input({ required: true }) category!: ItemCategory;
-  @Input() description?: string;
-  @Input() allergens?: string[];
   @Input() sizes?: Size[];
   @Input() price?: number;
   @Input() icon?: string;
@@ -20,19 +17,16 @@ export class ItemCardComponent implements OnInit {
 
   constructor(private orderService: OrderService) { }
 
-  ngOnInit() {
-    if (this.sizes) {
-      this.selectSize(this.sizes[0]);
-    }
-  }
-
   selectSize(size: Size) {
     this.selectedSize = size;
   }
 
-  addItemToOrder(item: OrderItem) {
-    const itemPrice: number = this.sizes ? this.selectedSize!.price : this.price!;
+  addItemToOrder() {
+    if (this.sizes) {
+      this.orderService.addItem({ category: this.category, item: this.item, size: this.selectedSize });
+    } else {
+      this.orderService.addItem({ category: this.category, item: this.item });
+    }
 
-    this.orderService.addItem({ category: this.category, item, price: itemPrice });
   }
 }

@@ -1,21 +1,23 @@
 <div class="flex flex-row gap-2 mb-2 rounded-lg p-2 bg-gradient-to-br from-sky-50 to-sky-100">
   <div class="w-1/4 aspect-square p-1">
-    <img class="block w-full place-self-center drop-shadow-md shadow-black" src="{{image | imageUrl}}">
+    <img class="block w-full place-self-center drop-shadow-md shadow-black" src="{{item.image | imageUrl}}">
   </div>
   <div class="relative w-2/4 flex flex-col">
-    <p class="font-bold">{{title}}</p>
-    <p class="mb-2 text-xs text-slate-600">{{description}}</p>
+    <p class="font-bold">{{item.name}}</p>
+    @if (item.description){
+      <p class="mb-2 text-xs text-slate-600">{{item.description}}</p>
+    }
     <ng-content select=".breakdown"></ng-content>
   </div>
   <div class="flex flex-col flex-wrap flex-grow-0 w-1/4">
     <ng-content select=".allergens"></ng-content>
     <div class="mt-auto">
       @if (sizes){
-        <app-size-selector [sizes]="sizes"></app-size-selector>
+        <app-size-selector [sizes]="sizes" (selectSizeEvent)="selectSize($event)"></app-size-selector>
       } @if (price) {
         <span class="block w-full text-center font-semibold text-2xl">{{price |currency}}</span>
       }
-      <button class="w-full mt-2 px-2 py-1 rounded-xl font-bold bg-lime-400 ring-2 ring-lime-500" i18n>Add to order</button>
+      <button class="w-full mt-2 px-2 py-1 rounded-xl font-bold bg-lime-400 ring-2 ring-lime-500" (click)="addItemToOrder()" i18n>Add to order</button>
     </div>
   </div>
 </div>

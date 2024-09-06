@@ -1,18 +1,20 @@
 <div class="relative flex flex-col h-full mb-2 rounded-lg p-2 bg-gradient-to-br from-sky-50 to-sky-100">
   <div class="aspect-square p-1">
-    <img class="block w-full place-self-center drop-shadow-lg shadow-black" src="{{image | imageUrl}}">
+    <img class="block w-full place-self-center drop-shadow-lg shadow-black" src="{{item.image | imageUrl}}">
   </div>
   <ng-content select=".allergens"></ng-content>
   <div class="relative flex flex-col">
-    <p class="font-bold leading-4 mb-2">{{title}}</p>
-    <p class="mb-2 text-xs text-slate-600">{{description}}</p>
+    <p class="font-bold leading-4 mb-2">{{item.name}}</p>
+    @if (item.description){
+      <p class="mb-2 text-xs text-slate-600">{{item.description}}</p>
+    }
   </div>
   <div class="flex flex-col flex-wrap mt-auto">
     @if (sizes){
-      <app-size-selector [sizes]="sizes" [icon]="icon"></app-size-selector>
+      <app-size-selector [sizes]="sizes" [icon]="icon" (selectSizeEvent)="selectSize($event)"></app-size-selector>
     } @if (price) {
       <span class="text-center font-semibold text-lg">{{price |currency}}</span>
     }
-    <button class="w-full mt-2 px-2 py-1 rounded-xl font-bold bg-lime-400 ring-2 ring-lime-500" i18n>Add to order</button>
+    <button class="w-full mt-2 px-2 py-1 rounded-xl font-bold bg-lime-400 ring-2 ring-lime-500" (click)="addItemToOrder()" i18n>Add to order</button>
   </div>
 </div>
