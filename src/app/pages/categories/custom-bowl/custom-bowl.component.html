@@ -7,7 +7,7 @@
       <!-- <div [ngClass]="{'!opacity-100': (currentStep |async)?.index === i}" -->
       <div [ngClass]="{'!block': (currentStep |async)?.index === i}" class="hidden px-6 size-full transition-all">
       <!--   <ng-container *ngComponentOutlet="step.component"></ng-container> -->
-        <app-step [stepData]="step"></app-step>
+        <app-step [stepData]="step" (selectedSizeEvent)="updateSize($event)"></app-step>
       </div>
     }
 

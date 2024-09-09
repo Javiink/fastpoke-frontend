@@ -1,18 +1,17 @@
 import { Injectable } from '@angular/core';
-import { OrderItem } from '../models/order-item';
+import { OrderItem, OrderItemData } from '../models/order-item';
 import { CustomBowl } from '../models/custom-bowl';
-import { Size } from '../models/size';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
-  items: OrderItemData[] = [];
   itemIndex: number = 0;
   takeOut: boolean = false;
 
   public total$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  public items$: BehaviorSubject<OrderItemData[]> = new BehaviorSubject<OrderItemData[]>([]);
 
   constructor() { }
 
@@ -35,11 +34,15 @@ export class OrderService {
       data.price = d.price
     }
 
-    this.items.push(data)
+    this.items$.next(this.items$.getValue().concat(data))
     this.itemIndex++;
 
     this.recalculateTotal();
 
+  }
+
+  getItems(){
+    return this.items$.asObservable();
   }
 
   removeItem(index: number){}
@@ -47,7 +50,7 @@ export class OrderService {
   recalculateTotal(){
     let total = 0;
 
-    const orderItems = this.items;
+    const orderItems = this.items$.getValue();
     orderItems.forEach(i => {
       total = total + i.price!;
     });
@@ -62,6 +65,4 @@ export class OrderService {
 
 }
 
-export type ItemCategory = 'bowls' | 'combos' | 'drinks' | 'sidedishes' | 'custom-bowl';
 
-export type OrderItemData = { category: ItemCategory, item: (OrderItem | CustomBowl), size?: Size, price?: number };

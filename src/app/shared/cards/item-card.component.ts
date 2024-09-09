@@ -1,5 +1,6 @@
 import { Directive, Input, OnInit } from '@angular/core';
-import { ItemCategory, OrderService } from '../../services/order.service';
+import { OrderService } from '../../services/order.service';
+import { ItemCategory } from '../../models/order-item';
 import { OrderItem } from '../../models/order-item';
 import { Size } from '../../models/size';
 

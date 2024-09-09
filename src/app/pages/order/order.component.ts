@@ -10,6 +10,7 @@ import { ItemCardXlComponent } from '../../shared/cards/item-card-xl/item-card-x
 import { ModalService } from '../../services/modal.service';
 import { Observable } from 'rxjs';
 import { OrderService } from '../../services/order.service';
+import { OrderItemData } from '../../models/order-item';
 
 
 @Component({
@@ -54,11 +55,13 @@ export class OrderComponent {
     },
   ]
 
-  protected activeCategory = this.categories[1];
+  protected activeCategory = this.categories[0];
   orderTotal: Observable<number>;
+  orderItems: Observable<OrderItemData[]>;
 
   constructor(private modalService: ModalService, private orderService: OrderService) {
     this.orderTotal = orderService.getTotal();
+    this.orderItems = orderService.getItems();
   }
 
   showCategory(path: string) {

@@ -5,13 +5,13 @@ import { Sidedish } from "./sidedishes";
 
 export interface Combo extends OrderItem{
   bowl: Bowl;
-  bowlSize?: BowlSizes;
+  bowlSize?: BowlSize;
   sidedish?: Sidedish;
-  sidedishSize?: SidedishSizes;
+  sidedishSize?: SidedishSize;
   drink: Drink;
   price: number;
   allergens: string[];
 }
 
-export type SidedishSizes = 'small' | 'medium';
-export type BowlSizes = 'medium' | 'large';
+export type SidedishSize = 'small' | 'medium';
+export type BowlSize = 'medium' | 'large';

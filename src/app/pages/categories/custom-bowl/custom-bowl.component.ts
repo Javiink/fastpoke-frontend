@@ -8,6 +8,9 @@ import { CustomBowlAdjacentSteps, CustomBowlStep } from '../../../models/custom-
 import { StepsService } from '../../../services/step.service';
 import { StepTabsComponent } from '../../bowl-assistant/step-tabs/step-tabs.component';
 import { StepComponent } from '../../bowl-assistant/step/step.component';
+import { OrderService } from '../../../services/order.service';
+import { SelectableIngredient } from '../../../models/ingredient';
+import { CustomBowl, CustomBowlSize } from '../../../models/custom-bowl';
 
 
 const initSteps: CustomBowlStep[] = [
@@ -118,13 +121,20 @@ export class CustomBowlComponent {
 
   isLastStep: boolean = false;
 
-  constructor(private stepService: StepsService){
+  bowl: CustomBowl;
+
+  constructor(private stepService: StepsService, private orderService: OrderService){
     this.stepService.setSteps(initSteps);
     this.steps = this.stepService.getSteps();
     this.currentStep = this.stepService.getCurrentStep();
     this.adjacentSteps = this.stepService.getAdjacentSteps();
 
-    stepService.setCurrentStep(initSteps[1])
+    this.bowl = {
+      ingredients: [],
+      size: {name: 'medium', price: 0}
+    }
+
+    stepService.setCurrentStep(initSteps[0])
   }
 
   prevStep(){
@@ -145,4 +155,22 @@ export class CustomBowlComponent {
     }
   }
 
+  updateSize(size: CustomBowlSize){
+    this.bowl.size = size
+    console.log(this.bowl.size);
+  }
+
+  updateStepIngredients(stepIngredients: StepIngredientsEvent){
+
+  }
+
+  addToOrder(){
+    //this.orderService.addItem({ category: 'custom-bowl', item: this.item, size: this.selectedSize });
+  }
+
+}
+
+export interface StepIngredientsEvent {
+  step: CustomBowlStep,
+  ingredients: SelectableIngredient[]
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CurrencyPipe, NgClass } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
@@ -8,8 +8,10 @@ import { SelectableIngredient } from '../../../models/ingredient';
 import { environment } from '../../../../environments/environment';
 import { ImageUrlPipe } from '../../../pipes/image-url.pipe';
 import { StepsService } from '../../../services/step.service';
-import { BowlSizes } from '../../../models/combo';
+import { BowlSize } from '../../../models/combo';
 import { AllergensComponent } from '../../../shared/allergens/allergens.component';
+import { StepIngredientsEvent } from '../../categories/custom-bowl/custom-bowl.component';
+import { CustomBowlSize } from '../../../models/custom-bowl';
 
 @Component({
   selector: 'app-step',
@@ -21,11 +23,13 @@ import { AllergensComponent } from '../../../shared/allergens/allergens.componen
 export class StepComponent implements OnInit {
 
   @Input({required: true}) stepData!: CustomBowlStep;
+  @Output() stepSelectedIngredients = new EventEmitter<StepIngredientsEvent>();
+  @Output() selectedSizeEvent = new EventEmitter<CustomBowlSize>();
   ingredients: SelectableIngredient[] = [];
 
   maxCustomDistinctIngredients: number = 0;
+  selectedSize: BowlSize | '' = '';
   selectedIngredients: SelectableIngredient[] = [];
-  selectedSize: BowlSizes | '' = '';
 
   constructor(private apiService: ApiService, private stepService: StepsService) {}
 
@@ -42,7 +46,6 @@ export class StepComponent implements OnInit {
   ingredientQty(ingredient: SelectableIngredient, action: boolean) {
     if (this.stepData.selectorType != 'quantity')
       return;
-
 
     if (action) {
       const totalSelected = this.getSelectedIngredients().length;
@@ -76,9 +79,16 @@ export class StepComponent implements OnInit {
 
     this.selectedIngredients = this.getSelectedIngredients();
     this.completeStep();
+    this.stepSelectedIngredients.emit({step: this.stepData, ingredients: this.selectedIngredients});
   }
 
-  selectSize(size: BowlSizes){
+  selectSize(size: 'medium' | 'large'){
+    const bowlSize: CustomBowlSize = {
+      name: size,
+      price: (size == 'medium' ? 10.90 : 13.90)
+    };
+
+    this.selectedSizeEvent.emit(bowlSize);
     this.selectedSize = size;
     this.stepService.completeCurrentStep();
   }
