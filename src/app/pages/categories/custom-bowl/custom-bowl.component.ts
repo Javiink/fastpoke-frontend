@@ -130,7 +130,9 @@ export class CustomBowlComponent {
     this.adjacentSteps = this.stepService.getAdjacentSteps();
 
     this.bowl = {
+      name: 'Custom bowl',
       ingredients: [],
+      image: 'custom-bowl.png',
       size: {name: 'medium', price: 0}
     }
 

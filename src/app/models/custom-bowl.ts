@@ -2,7 +2,9 @@ import { Ingredient } from "./ingredient";
 
 export interface CustomBowl {
   id?: number;
+  name: string;
   ingredients: Ingredient[];
+  image: string;
   size: {
     name: string,
     price: number
