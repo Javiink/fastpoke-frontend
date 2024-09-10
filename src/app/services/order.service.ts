@@ -33,6 +33,8 @@ export class OrderService {
     if (data.category == 'custom-bowl')
       data.item.id = this.itemIndex;
 
+    data.index = this.itemIndex;
+
     if (data.size) {
       data.price = data.size.price
     } else {
@@ -51,7 +53,11 @@ export class OrderService {
     return this.items$.asObservable();
   }
 
-  removeItem(index: number){}
+  removeItem(index: number){
+    const newOrderItems = this.items$.getValue().filter( i => i.index != index)
+    this.items$.next(newOrderItems);
+    this.recalculateTotal();
+  }
 
   recalculateTotal(){
     let total = 0;

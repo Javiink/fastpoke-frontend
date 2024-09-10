@@ -7,6 +7,13 @@ export interface OrderItem {
   description?: string;
   image: string;
 }
-export type OrderItemData = { category: ItemCategory; item: (OrderItem | CustomBowl); size?: Size; price?: number; };
+export type OrderItemData = {
+  index?: number;
+  category: ItemCategory;
+  item: (OrderItem | CustomBowl);
+  size?: Size;
+  price?: number;
+};
+
 export type ItemCategory = 'bowls' | 'combos' | 'drinks' | 'sidedishes' | 'custom-bowl';
 
