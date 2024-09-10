@@ -9,7 +9,7 @@
       </a>
     }
   </div>
-  <div class="items mt-5 pb-16 h-4/5 overflow-y-scroll scrollbar-hide" [ngClass]="{ 'gradient-mask-b-90': activeCategory.path != 'custom-bowl'}">
+  <div class="items mt-5 pb-16 h-4/5 overflow-y-hidden scrollbar-hide" [ngClass]="{ 'gradient-mask-b-90 overflow-y-scroll': activeCategory.path != 'custom-bowl'}">
     <ng-container *ngComponentOutlet="activeCategory.component"></ng-container>
   </div>
   <div class="cart absolute bottom-0 left-0 w-full h-20 flex flex-row place-items-center gap-5 rounded-t-3xl bg-gradient-to-b from-sky-500 to-sky-700 py-4 px-6 text-sky-50">
