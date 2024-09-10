@@ -8,19 +8,25 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class OrderService {
   itemIndex: number = 0;
-  takeOut: boolean = false;
 
   public total$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public items$: BehaviorSubject<OrderItemData[]> = new BehaviorSubject<OrderItemData[]>([]);
+  public takeout$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor() { }
-
-  setEatIn(){
-    this.takeOut = false;
+  constructor() {
+    this.items$.subscribe(d => {console.log(d);})
   }
 
-  setTakeOut(){
-    this.takeOut = true;
+  setEatin(){
+    this.takeout$.next(false);
+  }
+
+  setTakeout(){
+    this.takeout$.next(true);
+  }
+
+  isTakeout(){
+    return this.takeout$.asObservable();
   }
 
   addItem(data: OrderItemData){

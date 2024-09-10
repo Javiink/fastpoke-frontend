@@ -17,11 +17,11 @@ export class EntrypointComponent {
   constructor(private orderService: OrderService){}
 
   eatin(){
-    this.orderService.setEatIn()
+    this.orderService.setEatin()
   }
 
   takeout(){
-    this.orderService.setTakeOut()
+    this.orderService.setTakeout()
   }
 
 }
