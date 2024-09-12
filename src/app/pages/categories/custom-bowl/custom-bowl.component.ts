@@ -4,12 +4,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { animate, query, state, style, transition, trigger } from '@angular/animations';
 import { Observable } from 'rxjs';
 
-import { CustomBowlAdjacentSteps, CustomBowlStep } from '../../../models/custom-bowl-step';
+import { CustomBowlAdjacentSteps, CustomBowlStep, StepIngredientsEvent } from '../../../models/custom-bowl-step';
 import { StepsService } from '../../../services/step.service';
 import { StepTabsComponent } from '../../bowl-assistant/step-tabs/step-tabs.component';
 import { StepComponent } from '../../bowl-assistant/step/step.component';
 import { OrderService } from '../../../services/order.service';
-import { SelectableIngredient } from '../../../models/ingredient';
 import { CustomBowl, CustomBowlSize } from '../../../models/custom-bowl';
 
 
@@ -122,6 +121,12 @@ export class CustomBowlComponent {
   isLastStep: boolean = false;
 
   bowl: CustomBowl;
+  initialBowl = {
+      name: 'Custom bowl',
+      ingredients: [],
+      image: 'custom-bowl.png',
+      size: {name: 'medium', price: 0}
+    };
 
   constructor(private stepService: StepsService, private orderService: OrderService){
     this.stepService.setSteps(initSteps);
@@ -129,12 +134,7 @@ export class CustomBowlComponent {
     this.currentStep = this.stepService.getCurrentStep();
     this.adjacentSteps = this.stepService.getAdjacentSteps();
 
-    this.bowl = {
-      name: 'Custom bowl',
-      ingredients: [],
-      image: 'custom-bowl.png',
-      size: {name: 'medium', price: 0}
-    }
+    this.bowl = this.initialBowl;
 
     stepService.setCurrentStep(initSteps[0])
   }
@@ -162,17 +162,16 @@ export class CustomBowlComponent {
     console.log(this.bowl.size);
   }
 
-  updateStepIngredients(stepIngredients: StepIngredientsEvent){
-
+  updateStepIngredient(stepIngredients: StepIngredientsEvent){
+    const bowlIngredients = this.bowl.ingredients.filter(i => i.slot != stepIngredients.step.path);
+    bowlIngredients.push(...stepIngredients.ingredients)
+    this.bowl.ingredients = bowlIngredients;
   }
 
   addToOrder(){
-    //this.orderService.addItem({ category: 'custom-bowl', item: this.item, size: this.selectedSize });
+    this.orderService.addItem({ category: 'custom-bowl', item: this.bowl, size: this.bowl.size });
   }
 
 }
 
-export interface StepIngredientsEvent {
-  step: CustomBowlStep,
-  ingredients: SelectableIngredient[]
-}
+

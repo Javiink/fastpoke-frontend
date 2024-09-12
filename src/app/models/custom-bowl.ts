@@ -1,9 +1,9 @@
-import { Ingredient } from "./ingredient";
+import { SelectableIngredient } from "./ingredient";
 
 export interface CustomBowl {
   id?: number;
   name: string;
-  ingredients: Ingredient[];
+  ingredients: SelectableIngredient[];
   image: string;
   size: {
     name: string,

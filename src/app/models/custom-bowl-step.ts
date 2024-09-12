@@ -1,3 +1,5 @@
+import { SelectableIngredient } from "./ingredient";
+
 export interface CustomBowlStep {
   label: string;
   title: string;
@@ -9,5 +11,9 @@ export interface CustomBowlStep {
 export interface CustomBowlAdjacentSteps {
   prev: CustomBowlStep | null,
   next: CustomBowlStep | null
+}
+export interface StepIngredientsEvent {
+  step: CustomBowlStep;
+  ingredients: SelectableIngredient[];
 }
 

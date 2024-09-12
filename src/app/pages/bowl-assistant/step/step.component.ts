@@ -10,7 +10,7 @@ import { ImageUrlPipe } from '../../../pipes/image-url.pipe';
 import { StepsService } from '../../../services/step.service';
 import { BowlSize } from '../../../models/combo';
 import { AllergensComponent } from '../../../shared/allergens/allergens.component';
-import { StepIngredientsEvent } from '../../categories/custom-bowl/custom-bowl.component';
+import { StepIngredientsEvent } from '../../../models/custom-bowl-step';
 import { CustomBowlSize } from '../../../models/custom-bowl';
 
 @Component({
@@ -23,7 +23,7 @@ import { CustomBowlSize } from '../../../models/custom-bowl';
 export class StepComponent implements OnInit {
 
   @Input({required: true}) stepData!: CustomBowlStep;
-  @Output() stepSelectedIngredients = new EventEmitter<StepIngredientsEvent>();
+  @Output() selectedStepIngredients = new EventEmitter<StepIngredientsEvent>();
   @Output() selectedSizeEvent = new EventEmitter<CustomBowlSize>();
   ingredients: SelectableIngredient[] = [];
 
@@ -79,7 +79,7 @@ export class StepComponent implements OnInit {
 
     this.selectedIngredients = this.getSelectedIngredients();
     this.completeStep();
-    this.stepSelectedIngredients.emit({step: this.stepData, ingredients: this.selectedIngredients});
+    this.selectedStepIngredients.emit({step: this.stepData, ingredients: this.selectedIngredients});
   }
 
   selectSize(size: 'medium' | 'large'){

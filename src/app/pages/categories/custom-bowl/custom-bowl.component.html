@@ -7,7 +7,7 @@
       <!-- <div [ngClass]="{'!opacity-100': (currentStep |async)?.index === i}" -->
       <div [ngClass]="{'!block': (currentStep |async)?.index === i}" class="hidden px-6 size-full transition-all">
       <!--   <ng-container *ngComponentOutlet="step.component"></ng-container> -->
-        <app-step [stepData]="step" (selectedSizeEvent)="updateSize($event)"></app-step>
+        <app-step [stepData]="step" (selectedSizeEvent)="updateSize($event)" (selectedStepIngredients)="updateStepIngredient($event)"></app-step>
       </div>
     }
 
@@ -27,7 +27,7 @@
       </button>
     }
     @if(isLastStep && (currentStep | async)?.completed){
-      <button class="flex p-3 w-2/6 ml-auto bg-lime-300 rounded-xl ring-inset disabled:ring-2 disabled:ring-lime-300 disabled:!bg-lime-50" [disabled]="!(currentStep | async)?.completed" i18n>
+      <button class="flex p-3 w-2/6 ml-auto bg-lime-300 rounded-xl ring-inset disabled:ring-2 disabled:ring-lime-300 disabled:!bg-lime-50" [disabled]="!(currentStep | async)?.completed" (click)="addToOrder()" i18n>
         <span class="mx-auto text-xl leading-5">Add to order</span>
         <fa-icon icon="basket-shopping" class="ml-0 text-xl leading-5"></fa-icon>
       </button>
