@@ -61,7 +61,7 @@
             <button class="px-8 py-12 flex flex-col flex-wrap items-center justify-center rounded-xl w-full bg-gradient-to-br from-white to-sky-50 shadow-xl"
             [ngClass]="{'ring-inset ring-4 ring-lime-400 !to-sky-200': selectedSize == size.name}"
             (click)="selectSize(size.name)">
-              <i class="fpi-bowl-1 text-5xl leading-8"></i>
+              <i class="fpi-bowl-1 text-5xl leading-8" [ngClass]="{'text-6xl': size.name == 'large'}"></i>
               <p class="mt-4 text-xl">{{size.name | titlecase}}</p>
               <p>{{(size.price | currency)}}</p>
             </button>

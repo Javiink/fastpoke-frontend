@@ -1,36 +1,45 @@
 <div class="step-container size-full relative">
-  <app-step-tabs></app-step-tabs>
+  @if(finishedAssistant){
+    <div class="absolute size-full py-52 bg-white">
+      <fa-icon [icon]="['far', 'circle-check']" class="block mx-auto mb-4 text-center text-6xl leading-5 text-lime-600"></fa-icon>
+      <p class="block mx-auto mb-14 text-4xl font-bold text-center" i18n>Your creation is ready!</p>
+      <button class="block mx-auto px-5 py-7 text-3xl font-semibold rounded-xl w-3/4 bg-gradient-to-br from-sky-50 to-sky-200 shadow-xl" (click)="makeAnotherBowl()" i18n>Make another bowl</button>
+    </div>
+  }
+    <app-step-tabs></app-step-tabs>
+    <div class="size-full">
+        @for(step of (steps | async); track step.index; let i = $index){
+          <!-- <div [@slideAnimation]="(currentStep | async)?.index == i" [ngClass]="{'!opacity-100': (currentStep |async)?.index === i}" -->
+          <!-- <div [ngClass]="{'!opacity-100': (currentStep |async)?.index === i}" -->
+          <div [ngClass]="{'!block': (currentStep |async)?.index === i}" class="hidden px-6 size-full transition-all">
+          <!--   <ng-container *ngComponentOutlet="step.component"></ng-container> -->
+            <app-step [stepData]="step" (selectedSizeEvent)="updateSize($event)" (selectedStepIngredients)="updateStepIngredient($event)"></app-step>
+          </div>
+        }
 
-  <div class="size-full">
-    @for(step of (steps | async); track step.index; let i = $index){
-      <!-- <div [@slideAnimation]="(currentStep | async)?.index == i" [ngClass]="{'!opacity-100': (currentStep |async)?.index === i}" -->
-      <!-- <div [ngClass]="{'!opacity-100': (currentStep |async)?.index === i}" -->
-      <div [ngClass]="{'!block': (currentStep |async)?.index === i}" class="hidden px-6 size-full transition-all">
-      <!--   <ng-container *ngComponentOutlet="step.component"></ng-container> -->
-        <app-step [stepData]="step" (selectedSizeEvent)="updateSize($event)" (selectedStepIngredients)="updateStepIngredient($event)"></app-step>
-      </div>
-    }
+    </div>
 
-  </div>
+    @if(!finishedAssistant){
+      <div class="step-nav-buttons absolute w-full flex -bottom-14 left-0 p-2 z-20">
+      @if((adjacentSteps | async)?.prev){
+        <button class="flex p-3 w-2/6 mr-auto bg-lime-100 rounded-xl" (click)="prevStep()" i18n>
+          <fa-icon icon="angle-left" class="mr-0 text-2xl leading-5"></fa-icon>
+          <span class="mx-auto text-xl leading-5">{{(adjacentSteps | async)?.prev?.label}}</span>
+        </button>
+      }
+      @if((adjacentSteps | async)?.next){
+        <button class="flex p-3 w-2/6 ml-auto bg-lime-300 rounded-xl ring-inset disabled:ring-2 disabled:ring-lime-300 disabled:!bg-lime-50" (click)="nextStep()" [disabled]="!(currentStep | async)?.completed" i18n>
+          <span class="mx-auto text-xl leading-5">{{(adjacentSteps | async)?.next?.label}}</span>
+          <fa-icon icon="angle-right" class="ml-0 text-2xl leading-5"></fa-icon>
+        </button>
+      }
+      @if(isLastStep && (currentStep | async)?.completed){
+        <button class="flex p-3 w-2/6 ml-auto bg-lime-300 rounded-xl ring-inset disabled:ring-2 disabled:ring-lime-300 disabled:!bg-lime-50" [disabled]="!(currentStep | async)?.completed" (click)="addToOrder()" i18n>
+          <span class="mx-auto text-xl leading-5">Add to order</span>
+          <fa-icon icon="basket-shopping" class="ml-0 text-xl leading-5"></fa-icon>
+        </button>
+      }
+    </div>
+  }
 
-  <div class="step-nav-buttons absolute w-full flex -bottom-14 left-0 p-2 z-20">
-    @if((adjacentSteps | async)?.prev){
-      <button class="flex p-3 w-2/6 mr-auto bg-lime-100 rounded-xl" (click)="prevStep()" i18n>
-        <fa-icon icon="angle-left" class="mr-0 text-2xl leading-5"></fa-icon>
-        <span class="mx-auto text-xl leading-5">{{(adjacentSteps | async)?.prev?.label}}</span>
-      </button>
-    }
-    @if((adjacentSteps | async)?.next){
-      <button class="flex p-3 w-2/6 ml-auto bg-lime-300 rounded-xl ring-inset disabled:ring-2 disabled:ring-lime-300 disabled:!bg-lime-50" (click)="nextStep()" [disabled]="!(currentStep | async)?.completed" i18n>
-        <span class="mx-auto text-xl leading-5">{{(adjacentSteps | async)?.next?.label}}</span>
-        <fa-icon icon="angle-right" class="ml-0 text-2xl leading-5"></fa-icon>
-      </button>
-    }
-    @if(isLastStep && (currentStep | async)?.completed){
-      <button class="flex p-3 w-2/6 ml-auto bg-lime-300 rounded-xl ring-inset disabled:ring-2 disabled:ring-lime-300 disabled:!bg-lime-50" [disabled]="!(currentStep | async)?.completed" (click)="addToOrder()" i18n>
-        <span class="mx-auto text-xl leading-5">Add to order</span>
-        <fa-icon icon="basket-shopping" class="ml-0 text-xl leading-5"></fa-icon>
-      </button>
-    }
-  </div>
 </div>

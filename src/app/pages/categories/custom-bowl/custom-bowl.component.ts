@@ -119,6 +119,7 @@ export class CustomBowlComponent {
   adjacentSteps!: Observable<CustomBowlAdjacentSteps>;
 
   isLastStep: boolean = false;
+  finishedAssistant: boolean = false;
 
   initialBowl = {
     name: 'Custom bowl',
@@ -178,6 +179,11 @@ export class CustomBowlComponent {
     this.orderService.addItem({ category: 'custom-bowl', item: this.bowl, size: this.bowl.size });
     this.stepService.resetAssistant();
     this.checkLastStep();
+    this.finishedAssistant = true;
+  }
+
+  makeAnotherBowl(){
+    this.finishedAssistant = false;
   }
 
 }
