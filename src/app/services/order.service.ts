@@ -14,7 +14,7 @@ export class OrderService {
   public takeout$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor() {
-    this.items$.subscribe(d => {console.log(d);})
+    this.items$.subscribe(d => {})
   }
 
   setEatin(){

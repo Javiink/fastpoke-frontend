@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AsyncPipe, JsonPipe, NgClass, NgComponentOutlet } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { animate, query, state, style, transition, trigger } from '@angular/animations';
@@ -114,29 +114,40 @@ const initSteps: CustomBowlStep[] = [
 })
 export class CustomBowlComponent {
 
-  steps: Observable<CustomBowlStep[]>;
-  currentStep: Observable<CustomBowlStep>;
-  adjacentSteps: Observable<CustomBowlAdjacentSteps>;
+  steps!: Observable<CustomBowlStep[]>;
+  currentStep!: Observable<CustomBowlStep>;
+  adjacentSteps!: Observable<CustomBowlAdjacentSteps>;
 
   isLastStep: boolean = false;
 
-  bowl: CustomBowl;
   initialBowl = {
-      name: 'Custom bowl',
-      ingredients: [],
-      image: 'custom-bowl.png',
-      size: {name: 'medium', price: 0}
-    };
+    name: 'Custom bowl',
+    ingredients: [],
+    image: 'custom-bowl.png',
+    size: {name: 'medium', price: 0}
+  };
+  bowl: CustomBowl = JSON.parse(JSON.stringify(this.initialBowl));
 
   constructor(private stepService: StepsService, private orderService: OrderService){
-    this.stepService.setSteps(initSteps);
+    this.initialize();
+    stepService.resetSteps$.subscribe(r => {
+      if (r) {
+        this.initialize()
+      }
+    });
+  }
+
+  initialize(){
+    let steps = JSON.parse(JSON.stringify(initSteps));
+
+    this.stepService.setSteps(steps);
     this.steps = this.stepService.getSteps();
     this.currentStep = this.stepService.getCurrentStep();
     this.adjacentSteps = this.stepService.getAdjacentSteps();
 
-    this.bowl = this.initialBowl;
+    this.bowl = JSON.parse(JSON.stringify(this.initialBowl));
 
-    stepService.setCurrentStep(initSteps[0])
+    this.stepService.setCurrentStep(steps[0])
   }
 
   prevStep(){
@@ -150,16 +161,11 @@ export class CustomBowlComponent {
   }
 
   checkLastStep(){
-    if (this.stepService.isLastStep()) {
-      this.isLastStep = true;
-    } else {
-      this.isLastStep = false;
-    }
+    this.isLastStep = this.stepService.isLastStep();
   }
 
   updateSize(size: CustomBowlSize){
     this.bowl.size = size
-    console.log(this.bowl.size);
   }
 
   updateStepIngredient(stepIngredients: StepIngredientsEvent){
@@ -170,6 +176,8 @@ export class CustomBowlComponent {
 
   addToOrder(){
     this.orderService.addItem({ category: 'custom-bowl', item: this.bowl, size: this.bowl.size });
+    this.stepService.resetAssistant();
+    this.checkLastStep();
   }
 
 }

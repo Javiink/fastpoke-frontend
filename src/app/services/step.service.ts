@@ -22,6 +22,7 @@ export class StepsService {
     prev: emptyStep,
     next: emptyStep
   });
+  resetSteps$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor() {
   }
@@ -102,9 +103,10 @@ export class StepsService {
   }
 
   isLastStep(): boolean {
-    console.log(this.currentStep$.value.index);
-    console.log(this.steps$.value.length -1);
     return this.currentStep$.value.index === this.steps$.value.length -1;
   }
 
+  resetAssistant(){
+    this.resetSteps$.next(true);
+  }
 }

@@ -1,7 +1,7 @@
 <div class="step-container size-full relative">
   <app-step-tabs></app-step-tabs>
 
-  <div class="size-full" >
+  <div class="size-full">
     @for(step of (steps | async); track step.index; let i = $index){
       <!-- <div [@slideAnimation]="(currentStep | async)?.index == i" [ngClass]="{'!opacity-100': (currentStep |async)?.index === i}" -->
       <!-- <div [ngClass]="{'!opacity-100': (currentStep |async)?.index === i}" -->

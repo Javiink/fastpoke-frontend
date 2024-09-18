@@ -56,22 +56,17 @@
   @else {
     <div class="size-full mt-40">
       <div class="flex flex-wrap gap-4 cols-2 justify-center">
-        <div class="flex-grow flex-1">
-          <button class="px-8 py-12 flex flex-col flex-wrap items-center justify-center rounded-xl w-full bg-gradient-to-br from-white to-sky-50 shadow-xl"
-          [ngClass]="{'ring-inset ring-4 ring-lime-400 !to-sky-200': selectedSize == 'medium'}"
-          (click)="selectSize('medium')">
-            <i class="fpi-bowl-1 text-5xl leading-8"></i>
-            <p class="mt-4 text-xl">Medium</p>
-          </button>
-        </div>
-        <div class="flex-grow flex-1">
-          <button class="px-8 py-12 flex flex-col flex-wrap items-center justify-center rounded-xl w-full bg-gradient-to-br from-white to-sky-50 shadow-xl"
-          [ngClass]="{'ring-inset ring-4 ring-lime-400 !to-sky-200': selectedSize == 'large'}"
-          (click)="selectSize('large')">
-            <i class="fpi-bowl-1 text-6xl leading-8"></i>
-            <p class="mt-4 text-xl">Large</p>
-          </button>
-        </div>
+        @for(size of sizes; track size.name){
+          <div class="flex-grow flex-1">
+            <button class="px-8 py-12 flex flex-col flex-wrap items-center justify-center rounded-xl w-full bg-gradient-to-br from-white to-sky-50 shadow-xl"
+            [ngClass]="{'ring-inset ring-4 ring-lime-400 !to-sky-200': selectedSize == size.name}"
+            (click)="selectSize(size.name)">
+              <i class="fpi-bowl-1 text-5xl leading-8"></i>
+              <p class="mt-4 text-xl">{{size.name | titlecase}}</p>
+              <p>{{(size.price | currency)}}</p>
+            </button>
+          </div>
+        }
       </div>
     </div>
   }

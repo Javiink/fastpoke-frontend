@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { CurrencyPipe, NgClass } from '@angular/common';
+import { CurrencyPipe, NgClass, TitleCasePipe } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { ApiService } from '../../../services/api.service';
@@ -16,7 +16,7 @@ import { CustomBowlSize } from '../../../models/custom-bowl';
 @Component({
   selector: 'app-step',
   standalone: true,
-  imports: [NgClass, ImageUrlPipe, CurrencyPipe, FontAwesomeModule, AllergensComponent],
+  imports: [NgClass, ImageUrlPipe, CurrencyPipe, TitleCasePipe, FontAwesomeModule, AllergensComponent],
   templateUrl: './step.component.html',
   styles: ``
 })
@@ -26,14 +26,34 @@ export class StepComponent implements OnInit {
   @Output() selectedStepIngredients = new EventEmitter<StepIngredientsEvent>();
   @Output() selectedSizeEvent = new EventEmitter<CustomBowlSize>();
   ingredients: SelectableIngredient[] = [];
+  sizes: CustomBowlSize[] = [
+    {
+      name: 'medium',
+      price: 10.90
+    },
+    {
+      name: 'large',
+      price: 13.90
+    },
+  ]
 
   maxCustomDistinctIngredients: number = 0;
   selectedSize: BowlSize | '' = '';
   selectedIngredients: SelectableIngredient[] = [];
 
-  constructor(private apiService: ApiService, private stepService: StepsService) {}
+  constructor(private apiService: ApiService, private stepService: StepsService) {
+    stepService.resetSteps$.subscribe(r => {
+      if(r){
+        this.initialize()
+      }
+    });
+  }
 
   ngOnInit(): void {
+    this.initialize();
+  }
+
+  public initialize(){
     this.apiService.get(`/ingredients/slot/${this.stepData.path}`).subscribe((ingredients) => {
       this.ingredients = ingredients as SelectableIngredient[];
       if (this.stepData.selectorType == 'quantity') {
@@ -41,6 +61,8 @@ export class StepComponent implements OnInit {
       }
     })
     this.maxCustomDistinctIngredients = this.getMaxCustomDistinctIngredients();
+    this.selectedSize = '';
+    this.selectedIngredients = [];
   }
 
   ingredientQty(ingredient: SelectableIngredient, action: boolean) {
