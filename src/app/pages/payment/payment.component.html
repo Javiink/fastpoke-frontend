@@ -1,0 +1,24 @@
+<div class="p-10 flex flex-col size-full">
+  <div class="mt-auto mb-10 h-52 text-center font-semibold flex flex-col items-center">
+    @if(!payed){
+      <p class="my-auto text-4xl" i18n>Please, proceed to payment in the payment terminal</p>
+    }@else{
+      <p class="mt-auto mb-5 text-5xl" i18n>Thank you!</p>
+      <p class="mb-3 text-4xl" i18n>Please take your receipt and wait in the counter 🙂</p>
+      <p class="mb-auto text-3xl" i18n>Enjoy your meal!</p>
+    }
+  </div>
+  <div class="block mb-auto mx-auto aspect-square w-[350px] h-[350px]">
+    @if(!payed){
+      <video width="350" height="350" preload="auto" muted="muted" #tapToPay>
+        <source src="/animations/tap-to-pay.mp4#t=0.1" type="video/mp4">
+      </video>
+    }
+    @else{
+      <video width="350" height="350" preload="auto" muted="muted" loop="loop" autoplay="autoplay">
+        <source src="/animations/bill.mp4" type="video/mp4">
+      </video>
+    }
+  </div>
+  <app-logo class="block w-[30%] mt-12 mx-auto"></app-logo>
+</div>

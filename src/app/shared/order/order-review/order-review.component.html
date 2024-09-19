@@ -47,7 +47,9 @@
       </div>
     </div>
     <div class="w-1/2 p-4">
-      <button class="block w-full py-12 text-center align-middle font-bold text-4xl rounded-lg bg-gradient-to-br from-lime-500 to-lime-600 text-white hover:cursor-pointer focus:from-lime-300 focus:to-lime-600">
+      <button class="block w-full py-12 text-center align-middle font-bold text-4xl rounded-lg bg-gradient-to-br from-lime-500 to-lime-600 text-white hover:cursor-pointer focus:from-lime-300 focus:to-lime-600 disabled:from-slate-300 disabled:to-slate-400 disabled:hover:cursor-not-allowed"
+      [disabled]="(orderTotal | async)! <= 0"
+      (click)="goToPayment()">
         <fa-icon icon="credit-card" class="ml-2 text-3xl place-self-center"></fa-icon>
         <span class="ml-4" i18n>Pay</span>
       </button>
