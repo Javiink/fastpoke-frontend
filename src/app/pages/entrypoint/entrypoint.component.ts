@@ -3,6 +3,7 @@ import { ButtonIconTextXlComponent } from '../../shared/buttons/button-icon-text
 import { LogoComponent } from '../../shared/logo/logo.component';
 import { LangSwitcherComponent } from '../../shared/lang-switcher/lang-switcher.component';
 import { OrderService } from '../../services/order.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-entrypoint',
@@ -13,14 +14,16 @@ import { OrderService } from '../../services/order.service';
 })
 export class EntrypointComponent {
 
-  constructor(private orderService: OrderService){}
+  constructor(private orderService: OrderService, private router: Router){}
 
   eatin(){
-    this.orderService.setEatin()
+    this.orderService.setEatin();
+    this.router.navigate(['order']);
   }
 
   takeout(){
-    this.orderService.setTakeout()
+    this.orderService.setTakeout();
+    this.router.navigate(['order']);
   }
 
 }
