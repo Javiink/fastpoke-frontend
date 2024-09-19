@@ -5,6 +5,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html{
+  font-family: "Nunito", system-ui, sans-serif;
+}
+
 img{
   -webkit-user-drag: none;
 }
