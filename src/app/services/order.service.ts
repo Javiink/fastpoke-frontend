@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { OrderItem, OrderItemData } from '../models/order-item';
 import { CustomBowl } from '../models/custom-bowl';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { ItemWindowService } from './item-window.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class OrderService {
   public items$: BehaviorSubject<OrderItemData[]> = new BehaviorSubject<OrderItemData[]>([]);
   public takeout$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor() {
+  constructor(private itemWindowService: ItemWindowService) {
     this.items$.subscribe(d => {})
   }
 
@@ -45,6 +46,7 @@ export class OrderService {
     this.items$.next(this.items$.getValue().concat(data))
     this.itemIndex++;
 
+    this.itemWindowService.show(data);
     this.recalculateTotal();
 
   }
@@ -75,6 +77,14 @@ export class OrderService {
     return this.total$.asObservable();
   }
 
+  sendOrder(){
+    const order = {
+      total: this.total$.value,
+      takeout: this.takeout$.value,
+      items: this.items$.value
+    }
+    console.log(order);
+  }
 }
 
 

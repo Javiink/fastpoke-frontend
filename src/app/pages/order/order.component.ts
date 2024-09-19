@@ -11,12 +11,13 @@ import { ModalService } from '../../services/modal.service';
 import { Observable } from 'rxjs';
 import { OrderService } from '../../services/order.service';
 import { OrderItemData } from '../../models/order-item';
+import { ItemWindowComponent } from '../../shared/item-window/item-window.component';
 
 
 @Component({
   selector: 'app-order',
   standalone: true,
-  imports: [NgClass, NgComponentOutlet, CurrencyPipe, AsyncPipe, FontAwesomeModule, CombosComponent, BowlsComponent, SidedishesComponent, CustomBowlComponent, DrinksComponent, ItemCardXlComponent],
+  imports: [NgClass, NgComponentOutlet, CurrencyPipe, AsyncPipe, FontAwesomeModule, CombosComponent, BowlsComponent, SidedishesComponent, CustomBowlComponent, DrinksComponent, ItemCardXlComponent, ItemWindowComponent],
   templateUrl: './order.component.html',
   styles: '',
 })

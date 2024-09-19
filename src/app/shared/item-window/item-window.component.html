@@ -1,0 +1,8 @@
+<div class="absolute z-50 w-1/3 bottom-20 opacity-0 left-4 p-4 flex flex-col aspect-square rounded-3xl bg-gradient-to-br from-lime-50 to-lime-100 ring-inset ring-4 ring-lime-400 ease-in-out pointer-events-none"
+  [@openClose]="(visibility | async) ? 'open' : 'close'">
+  @if((item | async)){<p class="mt-0 text-center font-semibold">Added {{((item | async)!.item.name | lowercase )}}</p>}
+  <div class="mt-auto aspect-square">
+    @if((item | async)){<div class="aspect-square w-full bg-cover bg-center" [style]="imageStyle"></div>}
+  </div>
+</div>
+
