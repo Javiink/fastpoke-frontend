@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [AsyncPipe, CurrencyPipe, TitleCasePipe, ImageUrlPipe, FontAwesomeModule],
   templateUrl: './order-review.component.html',
-  styleUrl: './order-review.component.css'
+  styles: ''
 })
 export class OrderReviewComponent {
   @Output() closeModalEvent: EventEmitter<void> = new EventEmitter<void>();

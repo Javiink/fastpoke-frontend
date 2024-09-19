@@ -10,7 +10,7 @@ import { ApiService } from '../../../services/api.service';
   standalone: true,
   imports: [ItemCardMdComponent, AllergensComponent, CurrencyPipe],
   templateUrl: './sidedishes.component.html',
-  styleUrl: './sidedishes.component.css'
+  styles: ''
 })
 export class SidedishesComponent {
 

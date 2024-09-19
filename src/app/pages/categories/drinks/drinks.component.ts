@@ -10,7 +10,7 @@ import { CurrencyPipe } from '@angular/common';
   standalone: true,
   imports: [ItemCardMdComponent, AllergensComponent, CurrencyPipe],
   templateUrl: './drinks.component.html',
-  styleUrl: './drinks.component.css'
+  styles: ''
 })
 export class DrinksComponent {
 

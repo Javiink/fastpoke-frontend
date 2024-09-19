@@ -12,7 +12,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   standalone: true,
   imports: [ItemCardXlComponent, IngredientListComponent, AllergensComponent, ImageUrlPipe, FontAwesomeModule],
   templateUrl: './combos.component.html',
-  styleUrl: './combos.component.css'
+  styles: ''
 })
 export class CombosComponent {
 

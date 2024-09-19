@@ -18,7 +18,7 @@ import { OrderItemData } from '../../models/order-item';
   standalone: true,
   imports: [NgClass, NgComponentOutlet, CurrencyPipe, AsyncPipe, FontAwesomeModule, CombosComponent, BowlsComponent, SidedishesComponent, CustomBowlComponent, DrinksComponent, ItemCardXlComponent],
   templateUrl: './order.component.html',
-  styleUrls: ['./order.component.css'],
+  styles: '',
 })
 export class OrderComponent {
 

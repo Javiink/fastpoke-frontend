@@ -10,7 +10,7 @@ import { AllergensComponent } from '../../../shared/allergens/allergens.componen
   standalone: true,
   imports: [ItemCardXlComponent, IngredientListComponent, AllergensComponent],
   templateUrl: './bowls.component.html',
-  styleUrl: './bowls.component.css'
+  styles: ''
 })
 export class BowlsComponent {
 

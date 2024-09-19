@@ -68,7 +68,7 @@ const initSteps: CustomBowlStep[] = [
   imports: [NgComponentOutlet, NgClass, AsyncPipe, FontAwesomeModule, StepTabsComponent, StepComponent, JsonPipe],
   providers: [],
   templateUrl: './custom-bowl.component.html',
-  styleUrl: './custom-bowl.component.css',
+  styles: '',
   animations: [
     /* trigger('slideAnimation', [
       state('true', style({
