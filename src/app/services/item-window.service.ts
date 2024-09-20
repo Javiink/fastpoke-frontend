@@ -23,7 +23,7 @@ export class ItemWindowService {
     }
     this.timeout = setTimeout(() => {
       this.hide();
-    }, 1000);
+    }, 1200);
   }
 
   hide() {

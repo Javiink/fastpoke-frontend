@@ -1,10 +1,13 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { LogoComponent } from '../../shared/logo/logo.component';
+import { OrderService } from '../../services/order.service';
+import { Router } from '@angular/router';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-payment',
   standalone: true,
-  imports: [LogoComponent],
+  imports: [NgClass, LogoComponent],
   templateUrl: './payment.component.html',
   styles: ''
 })
@@ -14,9 +17,11 @@ export class PaymentComponent implements OnInit{
   @ViewChild('takeReceipt') takeReceiptAnimation!: ElementRef;
   payed: boolean = false;
 
+  constructor(private orderService: OrderService){}
+
   ngOnInit(): void {
     this.mockPayed().then(() => {
-      // Send order to backend
+      this.orderService.sendOrder();
     });
   }
 
@@ -32,5 +37,8 @@ export class PaymentComponent implements OnInit{
     })
   }
 
+  reloadApplication(){
+    window.location.href = '/';
+  }
 
 }

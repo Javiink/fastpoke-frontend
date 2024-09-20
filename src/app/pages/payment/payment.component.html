@@ -20,5 +20,8 @@
       </video>
     }
   </div>
-  <app-logo class="block w-[30%] mt-12 mx-auto"></app-logo>
+  <div class="block w-[30%] mt-12 mx-auto hover:cursor-pointer" (click)="reloadApplication()">
+    <app-logo></app-logo>
+    <p class="mt-2 text-center opacity-0" [ngClass]="{'opacity-100': payed}" i18n>Start again</p>
+  </div>
 </div>
