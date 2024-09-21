@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
 export class ImageUrlPipe implements PipeTransform {
 
   transform(value: string): string {
-    return environment.imgUrl + '/' + value;
+    return environment.imgUrl + '/thumbs/' + value;
   }
 
 }
