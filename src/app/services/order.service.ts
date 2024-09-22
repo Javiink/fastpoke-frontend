@@ -3,6 +3,7 @@ import { OrderItem, OrderItemData } from '../models/order-item';
 import { CustomBowl } from '../models/custom-bowl';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ItemWindowService } from './item-window.service';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class OrderService {
   public items$: BehaviorSubject<OrderItemData[]> = new BehaviorSubject<OrderItemData[]>([]);
   public takeout$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor(private itemWindowService: ItemWindowService) {
+  constructor(private itemWindowService: ItemWindowService, private apiService: ApiService) {
     this.items$.subscribe(d => {})
   }
 
@@ -78,12 +79,23 @@ export class OrderService {
   }
 
   sendOrder(){
+    const items = this.items$.value.map((item) => {
+      return {
+        item: item.item.id?.toString(),
+        category: item.category,
+        size: item.size
+      }
+    });
     const order = {
       total: this.total$.value,
       takeout: this.takeout$.value,
-      items: this.items$.value
+      items,
+      payed: true
     }
-    console.log(order);
+
+    this.apiService.post('/orders', order).subscribe((res) => {
+      console.log(`Order sent to backend, responded with ${res} code`);
+    })
   }
 }
 
