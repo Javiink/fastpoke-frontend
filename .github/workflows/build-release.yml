@@ -1,12 +1,16 @@
 name: Build and upload zip to Github
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
   pull_request:
     branches:
       - main
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -30,15 +34,19 @@ jobs:
       - name: Build Angular project
         run: npm run build:release
 
-      - name: Zip dist folder
-        run: zip -r fastpoke-kiosk.zip dist/fastpoke-frontend/browser/*
 
       - name: Get app version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@v1.3.1
 
-      - name: Upload zipped app as artifact
-        uses: actions/upload-artifact@v4
+      - name: Zip dist folder
+        run: zip -r fastpoke-kiosk-${{steps.package-version.outputs.current-version}}.zip dist/fastpoke-frontend/browser/*
+
+
+      - name: Upload zipped app as release
+        uses: softprops/action-gh-release@v2
         with:
           name: fastpoke-kiosk-${{steps.package-version.outputs.current-version}}
-          path: fastpoke-kiosk-${{steps.package-version.outputs.current-version}}.zip
+          files: fastpoke-kiosk-${{steps.package-version.outputs.current-version}}.zip
+          tag_name: ${{steps.package-version.outputs.current-version}}
+          token: ${{ secrets.GITHUB_TOKEN }}
