@@ -4,6 +4,7 @@ export const environment = {
   imgUrl: '',
   customBowl: {
     maxDistinctIngredients: {
+      size: 1,
       base: 1,
       sauce: 2,
       protein: 2,

@@ -7,8 +7,10 @@ import { environment } from '../../environments/environment';
 })
 export class ImageUrlPipe implements PipeTransform {
 
+  baseUrl = environment.imgUrl || `${location.protocol}//${location.hostname}/public/images`;
+
   transform(value: string): string {
-    return environment.imgUrl + '/thumbs/' + value;
+    return this.baseUrl + '/thumbs/' + value;
   }
 
 }

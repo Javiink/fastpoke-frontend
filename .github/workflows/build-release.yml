@@ -21,6 +21,9 @@ jobs:
         with:
           node-version: '18'
 
+      - name: Create environment file
+        run: cp src/environments/environment.example.ts src/environments/environment.ts
+
       - name: Install dependencies
         run: npm install
 
@@ -28,7 +31,7 @@ jobs:
         run: npm run build:release
 
       - name: Zip dist folder
-        run: zip -r fastpoke-kiosk.zip dist/browser
+        run: zip -r fastpoke-kiosk.zip dist/fastpoke-frontend/browser/*
 
       - name: Get app version
         id: package-version
