@@ -15,9 +15,7 @@ export class OrderService {
   public items$: BehaviorSubject<OrderItemData[]> = new BehaviorSubject<OrderItemData[]>([]);
   public takeout$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor(private itemWindowService: ItemWindowService, private apiService: ApiService) {
-    this.items$.subscribe(d => {})
-  }
+  constructor(private itemWindowService: ItemWindowService, private apiService: ApiService) {}
 
   setEatin(){
     this.takeout$.next(false);
@@ -62,6 +60,10 @@ export class OrderService {
     this.recalculateTotal();
   }
 
+  emptyOrder(){
+    this.items$.next([]);
+  }
+
   recalculateTotal(){
     let total = 0;
 
@@ -96,6 +98,9 @@ export class OrderService {
     this.apiService.post('/orders', order).subscribe((res) => {
       console.log(`Order sent to backend, responded with ${res} code`);
     })
+
+    this.emptyOrder();
+
   }
 }
 
