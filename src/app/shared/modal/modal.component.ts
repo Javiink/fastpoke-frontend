@@ -10,7 +10,7 @@ import { AsyncPipe, NgClass } from '@angular/common';
   standalone: true,
   imports: [NgClass, AsyncPipe, OrderReviewComponent],
   template: `
-    <div class="size-full max-w-[90vh] max-h-[100vh] aspect-[9/16] overflow-hidden h-screen hidden absolute inset-0 items-center justify-center bg-black bg-opacity-70 z-50"
+    <div class="size-full lg:max-w-[90vh] lg:max-h-[100vh] aspect-[9/16] overflow-hidden lg:h-screen hidden absolute inset-0 items-center justify-center bg-black bg-opacity-70 z-50"
     [ngClass]="{'!flex': (visible | async) === true }"
     [@modalAnimation]="(visible | async) && !hiding ? 'open' : 'close'">
       <div class="relative flex flex-col bg-gradient-to-br from-sky-50 to-sky-200 rounded-2xl shadow-xl p-6 w-[90%] h-[90%]">

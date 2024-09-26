@@ -13,10 +13,10 @@
           <div class="relative flex flex-col my-auto">
             @if(orderItem.category == 'custom-bowl'){
               <p class="text-xl font-bold">Custom bowl</p>
-              @if(orderItem.size){<span class="text-slate-700">{{(orderItem.size.name | titlecase)}} sized</span>}
+              @if(orderItem.size){<span class="text-slate-700">{{(orderItem.size.name | titlecase)}}-sized</span>}
             } @else {
               <p class="text-xl font-bold">{{orderItem.item.name}}</p>
-              @if(orderItem.size){<span class="text-slate-700">{{(orderItem.size.name | titlecase)}} sized</span>}
+              @if(orderItem.size){<span class="text-slate-700">{{(orderItem.size.name | titlecase)}}-sized</span>}
             }
           </div>
           <div class="my-auto ml-auto font-bold text-lg">
